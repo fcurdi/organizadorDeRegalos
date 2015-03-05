@@ -27,6 +27,8 @@
 				right: 50px;
 				background-color: rgb(253, 253, 253);
 				box-shadow: 0px 2px 12px #B2B2B2;
+				min-width: 1200px;
+				min-height: 500px;
 			}
 			
 			#title {
