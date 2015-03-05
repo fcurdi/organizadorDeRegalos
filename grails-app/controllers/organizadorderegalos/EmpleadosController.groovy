@@ -6,10 +6,6 @@ class EmpleadosController {
 		[empleados: Empleado.list()]
 	}
 	
-	def busqueda(){
-		
-	}
-	
 	def crearEmpleado(){
 		
 	}
