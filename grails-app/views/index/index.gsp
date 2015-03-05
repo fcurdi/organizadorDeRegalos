@@ -64,14 +64,17 @@
 					<thead>
 						<tr>
 							<td>Nombre</td>
+							<td>Cumpleaños</td>
 							<td>Regalo</td>	
 						</tr>
 					</thead>
 					<tbody>
 						<g:each in="${ regalos }" var="regalo">
 							<tr>
-								<td>${ empleados[regalo.empleadoId].nombre }</td>
-								<td>${ regalo.thumbnail }</td>
+								<td>${ regalo.empleado.nombre }</td>
+								<td>${ regalo.empleado.fechaNacimiento.format("dd/MM")}</td>
+								<td>${ regalo.titulo }</td>
+								<td><img src="${ regalo.thumbnail }"/></td>
 							</tr>
 						</g:each>
 					</tbody>
