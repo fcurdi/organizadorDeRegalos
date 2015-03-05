@@ -19,4 +19,8 @@ class EmpleadosController {
 			 dni:params.dni,fechaNacimiento:c);
 		 nuevo.save();
 	}
+	
+	def editarEmpleado(){
+		
+	}
 }
