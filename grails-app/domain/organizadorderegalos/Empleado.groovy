@@ -9,4 +9,5 @@ class Empleado {
 	
     static constraints = {
     }
+	
 }
