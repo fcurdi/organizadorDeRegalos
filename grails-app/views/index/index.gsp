@@ -70,7 +70,7 @@
 					<tbody>
 						<g:each in="${ regalos }" var="regalo">
 							<tr>
-								<td>${ empleado.findById(regalo.id_empleado).nombre }</td>
+								<td>${ empleados[regalo.empleadoId].nombre }</td>
 								<td>${ regalo.thumbnail }</td>
 							</tr>
 						</g:each>
