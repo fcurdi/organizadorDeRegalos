@@ -4,7 +4,7 @@ class Empleado {
 	String dni
 	String nombre
 	String apellido
-	Date fechaNacimiento
+	Calendar fechaNacimiento
 	static hasMany = [regalos: Regalo]
 	
     static constraints = {
