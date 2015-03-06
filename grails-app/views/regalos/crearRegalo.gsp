@@ -4,7 +4,69 @@
 		<script src="//code.jquery.com/jquery-1.11.2.min.js"></script>
 		<script src="//code.jquery.com/ui/1.11.3/jquery-ui.js"></script>
 		<link rel="stylesheet" href="/resources/demos/style.css">
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+		<link href='http://fonts.googleapis.com/css?family=Roboto:300,100' rel='stylesheet' type='text/css'>
+		
 		<style>
+			body {
+				font-family: Roboto;
+				font-size: 14px;
+				color: #37474f;
+				background-color: #F4F4F4;
+			}
+			
+			#background {
+				position: absolute;
+				z-index: 1;
+				width: 100%;
+				height: 222px;
+				content: '';
+				top: 0;
+				left: 0;
+				background-color: rgb(249, 103, 60);
+			}
+			
+			#container {
+				position: absolute;
+				min-height: 85%;
+				top: 50px;
+				left: 50px;
+				right: 50px;
+				background-color: rgb(253, 253, 253);
+				box-shadow: 0px 2px 12px #B2B2B2;
+				z-index: 2;
+				margin-bottom: 50px;
+			}
+			
+			#title {
+				text-align: center;
+				font-size: 40px;
+				font-weight: 100;
+				padding: 30px;
+			}
+			
+			#nav {
+				text-align: center;
+				padding: 45px;
+				font-size: 20px;
+			}
+			
+			#list-empleados{
+				text-align: center;
+			}
+			
+			a:hover { text-underline: none; border-bottom: 1px solid red; }
+			ul { text-align : center }
+			ul li { display: inline; white-space: nowrap; margin-right: 20px; }
+			::-webkit-scrollbar {
+			    width: 10px;
+			}
+			 
+			/* Handle */
+			::-webkit-scrollbar-thumb {
+			    background: rgba(200,0,0,0.1); 
+			}
+			
 .custom-combobox {
 position: relative;
 display: inline-block;
@@ -38,8 +100,9 @@ padding: 5px 10px;
 					this.input = $( "<input>" )
 						.appendTo( this.wrapper )
 						.val( value )
-						.attr( "title", "" )
-						.addClass( "custom-combobox-input ui-widget ui-widget-content ui-state-default ui-corner-left" )
+						.attr( "title", "")
+						.attr("placeholder", "Buscar Empleado")
+						.addClass( "form-control" )
 						.autocomplete({
 							delay: 0,
 							minLength: 0,
@@ -120,7 +183,7 @@ padding: 5px 10px;
 				 	// Remove invalid value
 				 	this.input
 				 		.val( "" )
-				 		.attr( "title", value + " didn't match any item" )
+				 		.attr( "title", "El empleado "+ value + " no existe." )
 				 		.tooltip( "open" );
 				 	this.element.val( "" );
 				 	this._delay(function() {
@@ -144,32 +207,64 @@ padding: 5px 10px;
 	</head>
 	
 	<body>
-		<input placeholder="Busque regalo..." id="search"/>
-		<button id="btn-buscar">Buscar</button>
-		<div id="productos"></div>
-		
-		
-		
-		<form action="${ createLink(controller:"Regalos",action:"guardarRegalo")}" method="post">
-			<!-- Adentro de este form hay que poner lo de los radio buttons y lo de elegir un anio para regalar-->
-			
-			
-			
-			
-			<input name="anio" placeholder="Ingresar anio..." id="input-anio">	
-		
-			
-			<div class="ui-widget">
-			<label>Elegir empleado: </label>
-			<select id="combobox" name="idEmpleado">
-				<option value="">Select one...</option>
-				<g:each in="${empleados}" var="empleado">
-					<option value="${empleado.id}">${empleado.nombre} ${empleado.apellido} ${empleado.dni} </option>
-				</g:each>
-			</select>
-			<button id="btn-guardar" type="submit">Guardar regalo</button>
+		<div id="background"></div>
+		<div id="container">
+			<div class="row">
+				<div class="col-md-6">
+					<div id="title" style="float: left;">
+						Nuevo Regalo
+					</div>
+				</div>
+				<div id="nav" class="col-md-6">
+					<ul>
+						<li><a href="">Últimos Regalos</a></li>
+						<li><a href="">Nuevo Empleado</a></li>
+						<li><a href="">Nuevo Regalo</a></li>
+					</ul>
+				</div>
 			</div>
-		</form>
+			<div class="row">
+				<div class="col-md-6">
+					<form action="${ createLink(controller:"Regalos",action:"guardarRegalo")}" method="post">
+						<!-- Adentro de este form hay que poner lo de los radio buttons -->
+						<div>
+							<select id="combobox" name="idEmpleado" class="form-control">
+								 <option value="" disabled selected>Buscar Empleado</option>
+								<g:each in="${empleados}" var="empleado">
+									<option value="${empleado.id}">${empleado.nombre} ${empleado.apellido} ${empleado.dni} </option>
+								</g:each>
+							</select><br>
+							<input name="anio" placeholder="Ingrese año" id="input-anio"><br>
+							<button id="btn-guardar" type="submit">Guardar regalo</button>
+						</div>
+					</form>
+				</div>
+				<div class="col-md-6">
+					<div id="list-regalo">
+					<div class="row">
+						<div class="col-md-1"></div>
+						<div class="col-md-10" style="margin: auto; text-align: center;">
+							<input id="search" style="margin: auto; display: inline; margin-bottom: 20px; width: 70%;" type="text" class="form-control" placeholder="Buscar Regalo">
+							<button id="btn-buscar" class="btn btn-default" style="height: 34px; vertical-align: top;"><span class="glyphicon glyphicon-search"></span></button>
+						</div>
+						<div class="col-md-1"></div>
+					</div>
+						
+						<div class="row">
+							<div class="col-md-1"></div>
+							<div class="col-md-10"  style="overflow: scroll;height: 380px;">
+								<table class="table table-hover" id="productos">
+								</table>
+							</div>
+							<div class="col-md-1"></div>
+						</div>
+						
+						
+						
+					</div>
+				</div>
+			</div>
+		</div>
 	</body>
 </html>
 
@@ -182,14 +277,17 @@ padding: 5px 10px;
 			alert("Ingrese algún regalo");
 		}else{
 			$.ajax({
-				url: "https://api.mercadolibre.com/sites/MLA/search?q="+regalo,
+				url: "https://api.mercadolibre.com/sites/MLA/search?q="+regalo+"&limit=10",
 				dataType:"json",
 				type:"GET",
 				success:function(data){
 					for(var i=0;i<data.results.length;i++){
 						$("#productos").append(
-							"<img src="+data.results[i].thumbnail+">"
-							+"<a href="+data.results[i].permalink+">"+data.results[i].title+"</a><br>"
+							"<tr style=\"cursor: pointer;\">"+
+							"<td>"+
+								"<img src="+data.results[i].thumbnail+"></td>"
+							+"<td><a href="+data.results[i].permalink+">"+data.results[i].title+
+							"</a></td><tr>"
 						);
 					}
 				}
