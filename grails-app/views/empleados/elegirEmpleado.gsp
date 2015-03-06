@@ -144,7 +144,7 @@
 	</head>
 	
 	<body>
-		<form action="${ createLink(controller:"Empleados",action:"eliminarEmpleado")}" method="post">
+		<form action="${ createLink(controller:"Empleados",action:"accionEmpleado")}" method="post">
 			<div class="ui-widget">
 			<label>Elegir Empleado: </label>
 			<select id="combobox" name="idEmpleado">
@@ -152,6 +152,11 @@
 				<g:each in="${empleados}" var="empleado">
 					<option value="${empleado.id}">${empleado.nombre} ${empleado.apellido} ${empleado.dni}</option>
 				</g:each>
+			</select>
+			<label>Acción:</label>
+			<select name="accion">
+				<option value="editar">Editar</option>
+				<option value="eliminar">Eliminar</option>
 			</select>
 			<button id="btn-eliminar" type="submit">Eliminar empleado</button>
 			</div>
