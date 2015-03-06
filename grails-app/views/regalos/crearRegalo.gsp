@@ -67,13 +67,8 @@
 			    background: rgba(200,0,0,0.1); 
 			}
 			
-			::-moz-scrollbar {
-			    width: 10px;
-			}
-			 
-			/* Handle */
-			::-moz-scrollbar-thumb {
-			    background: rgba(200,0,0,0.1); 
+			.bg {
+			  background-color: #550055;
 			}
 			
 .custom-combobox {
@@ -232,10 +227,11 @@ padding: 5px 10px;
 					</ul>
 				</div>
 			</div>
+			<form action="${ createLink(controller:"Regalos",action:"guardarRegalo", params : [])}" method="post">
+					
 			<div class="row">
 				<div class="col-md-6">
 					
-					<form action="${ createLink(controller:"Regalos",action:"guardarRegalo")}" method="post">
 						<!-- Adentro de este form hay que poner lo de los radio buttons -->
 						<div>
 							<select id="combobox" name="idEmpleado" class="form-control">
@@ -245,61 +241,76 @@ padding: 5px 10px;
 								</g:each>
 							</select><br>
 							<input name="anio" placeholder="Ingrese año" id="input-anio"><br>
-							<button id="btn-guardar" type="submit">Guardar regalo</button>
+							
 						</div>
-					</form>
-				</div> 
+					
+				</div>
 				<div class="col-md-6">
 					<div id="list-regalo">
 						<div class="row">
 							<div class="col-md-1"></div>
 							<div class="col-md-10" style="margin: auto; text-align: center;">
 								<input id="search" style="margin: auto; display: inline; margin-bottom: 20px; width: 70%;" type="text" class="form-control" placeholder="Buscar Regalo">
-								<button id="btn-buscar" class="btn btn-default" style="height: 34px; vertical-align: top;"><span class="glyphicon glyphicon-search"></span></button>
+								<button type="button" id="btn-buscar" class="btn btn-default" style="height: 34px; vertical-align: top;"><span class="glyphicon glyphicon-search"></span></button>
 							</div>
 							<div class="col-md-1"></div>
 						</div>
 						
 						<div class="row">
 							<div class="col-md-1"></div>
-							<div class="col-md-10"  style="overflow: scroll;height: 380px;">
+							<div class="col-md-10"  style="overflow: auto;height: 380px;">
 								<table class="table table-hover" id="productos">
+									<tbody></tbody>
 								</table>
 							</div>
 							<div class="col-md-1"></div>
 						</div>
+						
 					</div>
 				</div>
+				
 			</div>
+			<button id="btn-guardar" type="submit">Guardar regalo</button>
+		</form>
 		</div>
 	</body>
 </html>
 
 <script type="text/javascript">
 	$("#btn-buscar").click(getProductos);
+	
 	function getProductos(){
-		$("#productos").html("");
+	/*	$("#productos").html("");
 		var regalo = $("#search").val();
 		if(regalo == ""){
 			alert("Ingrese algún regalo");
-		}else{
+		}else{*/
 			$.ajax({
-				url: "https://api.mercadolibre.com/sites/MLA/search?q="+regalo+"&limit=10",
+				url: "https://api.mercadolibre.com/sites/MLA/search?q=\"pokemon\"&limit=10",
 				dataType:"json",
 				type:"GET",
 				success:function(data){
 					for(var i=0;i<data.results.length;i++){
-						$("#productos").append(
-							"<tr style=\"cursor: pointer;\">"+
+						$("#productos tbody").append(
+							"<tr id="+i+" style=\"cursor: pointer;\">"+
 							"<td>"+
 								"<img src="+data.results[i].thumbnail+"></td>"
 							+"<td><a href="+data.results[i].permalink+">"+data.results[i].title+
-							"</a></td><tr>"
+							"</a></td><td><input name=\"regaloSeleccionado\" id=\"regaloSeleccionado_"+i+"\" type='radio' value='"+data.results[i]+"'></td><tr>"
 						);
 					}
+					 $('#productos tbody tr').on('click', function () {
+					        $(this).closest('table').find('td').removeClass('bg');
+					        $(this).find('td').addClass('bg');
+						    $(this).find('tr input:radio').prop('checked', true);
+					    });
 				}
 			});
-		}
+		/*}*/
+		
 	}
+
+
+	
 	
 </script>
