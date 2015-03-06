@@ -67,6 +67,15 @@
 			    background: rgba(200,0,0,0.1); 
 			}
 			
+			::-moz-scrollbar {
+			    width: 10px;
+			}
+			 
+			/* Handle */
+			::-moz-scrollbar-thumb {
+			    background: rgba(200,0,0,0.1); 
+			}
+			
 .custom-combobox {
 position: relative;
 display: inline-block;
@@ -225,6 +234,7 @@ padding: 5px 10px;
 			</div>
 			<div class="row">
 				<div class="col-md-6">
+					
 					<form action="${ createLink(controller:"Regalos",action:"guardarRegalo")}" method="post">
 						<!-- Adentro de este form hay que poner lo de los radio buttons -->
 						<div>
@@ -241,14 +251,14 @@ padding: 5px 10px;
 				</div> 
 				<div class="col-md-6">
 					<div id="list-regalo">
-					<div class="row">
-						<div class="col-md-1"></div>
-						<div class="col-md-10" style="margin: auto; text-align: center;">
-							<input id="search" style="margin: auto; display: inline; margin-bottom: 20px; width: 70%;" type="text" class="form-control" placeholder="Buscar Regalo">
-							<button id="btn-buscar" class="btn btn-default" style="height: 34px; vertical-align: top;"><span class="glyphicon glyphicon-search"></span></button>
+						<div class="row">
+							<div class="col-md-1"></div>
+							<div class="col-md-10" style="margin: auto; text-align: center;">
+								<input id="search" style="margin: auto; display: inline; margin-bottom: 20px; width: 70%;" type="text" class="form-control" placeholder="Buscar Regalo">
+								<button id="btn-buscar" class="btn btn-default" style="height: 34px; vertical-align: top;"><span class="glyphicon glyphicon-search"></span></button>
+							</div>
+							<div class="col-md-1"></div>
 						</div>
-						<div class="col-md-1"></div>
-					</div>
 						
 						<div class="row">
 							<div class="col-md-1"></div>
@@ -258,9 +268,6 @@ padding: 5px 10px;
 							</div>
 							<div class="col-md-1"></div>
 						</div>
-						
-						
-						
 					</div>
 				</div>
 			</div>
