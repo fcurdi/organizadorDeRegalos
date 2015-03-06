@@ -20,6 +20,16 @@ class EmpleadosController {
 		 nuevo.save();
 	}
 	
+	def elegirEmpleado(){
+		[empleados:Empleado.list()]
+	}
+	
+	def eliminarEmpleado(){
+		def empleado=Empleado.get(params.idEmpleado)
+		empleado.delete(flush:true)
+		redirect(controller:"index",action:"index")
+	}
+	
 	def editarEmpleado(){
 		
 	}

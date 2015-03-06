@@ -17,4 +17,13 @@ class RegalosController {
 		redirect(controller:"index",action:"index");
 	}
 	
+	def elegirRegalo(){
+		[regalos:Regalo.list()]
+	}
+	
+	def eliminarRegalo(){
+		def regalo=Regalo.get(params.idRegalo)
+		regalo.removeFromEmpleado(regalo.empleado)
+		redirect(controller:"index",action:"index")
+	}
 }
