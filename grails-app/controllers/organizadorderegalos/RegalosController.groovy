@@ -4,7 +4,7 @@ class RegalosController {
 
     def index() { }
 	
-	def busqueda(){
+	def crearRegalo(){
 		[empleados:Empleado.list()]
 	}
 	

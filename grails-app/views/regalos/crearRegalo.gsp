@@ -1,27 +1,200 @@
-html>
+<html>
 	<head>
+		<link rel="stylesheet" href="//code.jquery.com/ui/1.11.3/themes/smoothness/jquery-ui.css">
 		<script src="//code.jquery.com/jquery-1.11.2.min.js"></script>
 		<script src="//code.jquery.com/ui/1.11.3/jquery-ui.js"></script>
+		<link rel="stylesheet" href="/resources/demos/style.css">
+		<style>
+.custom-combobox {
+position: relative;
+display: inline-block;
+}
+.custom-combobox-toggle {
+position: absolute;
+top: 0;
+bottom: 0;
+margin-left: -1px;
+padding: 0;
+}
+.custom-combobox-input {
+margin: 0;
+padding: 5px 10px;
+}
+</style>
+		<script>
+		(function( $ ) {
+			$.widget( "custom.combobox", {
+				_create: function() {
+					this.wrapper = $( "<span>" )
+						.addClass( "custom-combobox" )
+						.insertAfter( this.element );
+					this.element.hide();
+					this._createAutocomplete();
+					//this._createShowAllButton();
+				},
+				_createAutocomplete: function() {
+					var selected = this.element.children( ":selected" ),
+					value = selected.val() ? selected.text() : "";
+					this.input = $( "<input>" )
+						.appendTo( this.wrapper )
+						.val( value )
+						.attr( "title", "" )
+						.addClass( "custom-combobox-input ui-widget ui-widget-content ui-state-default ui-corner-left" )
+						.autocomplete({
+							delay: 0,
+							minLength: 0,
+							source: $.proxy( this, "_source" )
+						})
+						.tooltip({
+							tooltipClass: "ui-state-highlight"
+						});
+					this._on( this.input, {
+						autocompleteselect: function( event, ui ) {
+							ui.item.option.selected = true;
+							this._trigger( "select", event, {
+								item: ui.item.option
+							});
+						},
+						autocompletechange: "_removeIfInvalid"
+					});
+				},
+				/*_createShowAllButton: function() {
+					var input = this.input,
+					wasOpen = false;
+					$( "<a>" )
+						.attr( "tabIndex", -1 )
+						.tooltip()
+						.appendTo( this.wrapper )
+						.button({
+							icons: {
+								primary: "ui-icon-triangle-1-s"
+							},
+							text: false
+						})
+						.removeClass( "ui-corner-all" )
+						.addClass( "custom-combobox-toggle ui-corner-right" )
+						.mousedown(function() {
+							wasOpen = input.autocomplete( "widget" ).is( ":visible" );
+						})
+						.click(function() {
+							input.focus();
+							// Close if already visible
+							if ( wasOpen ) {
+								return;
+							}
+							// Pass empty string as value to search for, displaying all results
+							input.autocomplete( "search", "" );
+						});
+				},*/
+				_source: function( request, response ) {
+					var matcher = new RegExp( $.ui.autocomplete.escapeRegex(request.term), "i" );
+					response( this.element.children( "option" ).map(function() {
+					var text = $( this ).text();
+					if ( this.value && ( !request.term || matcher.test(text) ) )
+						return {
+							label: text,
+							value: text,
+							option: this
+						};
+					}) );
+				},
+				_removeIfInvalid: function( event, ui ) {
+				// Selected an item, nothing to do
+					if ( ui.item ) {
+				 		return;
+				 	}
+					// Search for a match (case-insensitive)
+					var value = this.input.val(),
+				 		valueLowerCase = value.toLowerCase(),
+				 		valid = false;
+				 	this.element.children( "option" ).each(function() {
+				 		if ( $( this ).text().toLowerCase() === valueLowerCase ) {
+				 			this.selected = valid = true;
+				 			return false;
+				 		}
+				 	});
+					// Found a match, nothing to do
+				 	if ( valid ) {
+				 		return;
+				 	}
+				 	// Remove invalid value
+				 	this.input
+				 		.val( "" )
+				 		.attr( "title", value + " didn't match any item" )
+				 		.tooltip( "open" );
+				 	this.element.val( "" );
+				 	this._delay(function() {
+				 		this.input.tooltip( "close" ).attr( "title", "" );
+				 	}, 2500 );
+				 	this.input.autocomplete( "instance" ).term = "";
+				},
+				_destroy: function() {
+				 	this.wrapper.remove();
+				 	this.element.show();
+				}
+			});
+		})( jQuery );
+		$(function() {
+			$( "#combobox" ).combobox();
+			$( "#toggle" ).click(function() {
+				$( "#combobox" ).toggle();
+			});
+		});
+		</script>
 	</head>
 	
-		
 	<body>
-		<form action="${ createLink(controller:"Empleados",action:"guardarEmpleado")}" method="post">
-			<input id="input-nombre" name="nombre" placeholder="Nombre"/>
-			<input id="input-apellido" name="apellido" placeholder="Apellido"/>
-			<span>
-				titulo:${titulo},   
-			</span>
-			<input type="text" id="input-fecha" name="fecha" />
-			<button id="btn-nuevo" type="submit">Nuevo empleado</button>
-		 </form>
+		<input placeholder="Busque regalo..." id="search"/>
+		<button id="btn-buscar">Buscar</button>
 		<div id="productos"></div>
+		
+		
+		
+		<form action="${ createLink(controller:"Regalos",action:"guardarRegalo")}" method="post">
+			<!-- Adentro de este form hay que poner lo de los radio buttons y lo de elegir un anio para regalar-->
+			
+			
+			
+			
+			<input name="anio" placeholder="Ingresar anio..." id="input-anio">	
+		
+			
+			<div class="ui-widget">
+			<label>Elegir empleado: </label>
+			<select id="combobox" name="idEmpleado">
+				<option value="">Select one...</option>
+				<g:each in="${empleados}" var="empleado">
+					<option value="${empleado.id}">${empleado.nombre} ${empleado.apellido} ${empleado.dni} </option>
+				</g:each>
+			</select>
+			<button id="btn-guardar" type="submit">Guardar regalo</button>
+			</div>
+		</form>
 	</body>
-	<script>
-		$(function() {
-			$( "#input-fecha" ).datepicker();
-			$( "#input-fecha" ).datepicker("option","dateFormat", "yy-mm-dd" );
-		});
-	</script>
-
 </html>
+
+<script type="text/javascript">
+	$("#btn-buscar").click(getProductos);
+	function getProductos(){
+		$("#productos").html("");
+		var regalo = $("#search").val();
+		if(regalo == ""){
+			alert("Ingrese algún regalo");
+		}else{
+			$.ajax({
+				url: "https://api.mercadolibre.com/sites/MLA/search?q="+regalo,
+				dataType:"json",
+				type:"GET",
+				success:function(data){
+					for(var i=0;i<data.results.length;i++){
+						$("#productos").append(
+							"<img src="+data.results[i].thumbnail+">"
+							+"<a href="+data.results[i].permalink+">"+data.results[i].title+"</a><br>"
+						);
+					}
+				}
+			});
+		}
+	}
+	
+</script>
