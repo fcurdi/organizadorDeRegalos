@@ -144,7 +144,7 @@
 	</head>
 	
 	<body>
-		<form action="${ createLink(controller:"Regalos",action:"eliminarRegalo")}" method="post">
+		<form action="${ createLink(controller:"Regalos",action:"accionRegalo")}" method="post">
 			<div class="ui-widget">
 			<label>Elegir Regalo: </label>
 			<select id="combobox" name="idRegalo">
@@ -152,6 +152,11 @@
 				<g:each in="${regalos}" var="regalo">
 					<option value="${regalo.id}">${regalo.titulo} de ${regalo.empleado.nombre} ${regalo.empleado.apellido}</option>
 				</g:each>
+			</select>
+			<label>Acción:</label>
+			<select name="accion">
+				<option value="editar">Editar</option>
+				<option value="eliminar">Eliminar</option>
 			</select>
 			<button id="btn-eliminar" type="submit">Eliminar regalo</button>
 			</div>

@@ -17,8 +17,23 @@ class RegalosController {
 		redirect(controller:"index",action:"index");
 	}
 	
+	def editarRegalo(){
+		[regalo:Regalo.get(params.idRegalo)]
+	}
+	
 	def elegirRegalo(){
 		[regalos:Regalo.list()]
+	}
+	
+	def accionRegalo(){
+		switch(params.accion){
+			case "editar":
+				redirect(controller:"regalos",action:"editarRegalo",params:params);
+				break;
+			case "eliminar":
+				redirect(controller:"regalos",action:"eliminarRegalo",params:params);
+				break;
+		}
 	}
 	
 	def eliminarRegalo(){
