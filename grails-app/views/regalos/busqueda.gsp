@@ -147,11 +147,20 @@ padding: 5px 10px;
 		<input placeholder="Busque regalo..." id="search"/>
 		<button id="btn-buscar">Buscar</button>
 		<div id="productos"></div>
+		
+		
+		
 		<form action="${ createLink(controller:"Regalos",action:"guardarRegalo")}" method="post">
-			<!-- Adentro de este form hay que poner lo de los radio buttons -->
+			<!-- Adentro de este form hay que poner lo de los radio buttons y lo de elegir un anio para regalar-->
+			
+			
+			
+			
+			<input name="anio" placeholder="Ingresar anio..." id="input-anio">	
+		
 			
 			<div class="ui-widget">
-			<label>Your preferred programming language: </label>
+			<label>Elegir empleado: </label>
 			<select id="combobox" name="idEmpleado">
 				<option value="">Select one...</option>
 				<g:each in="${empleados}" var="empleado">
