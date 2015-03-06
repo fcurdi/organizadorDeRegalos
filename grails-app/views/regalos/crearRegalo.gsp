@@ -238,7 +238,7 @@ padding: 5px 10px;
 							<button id="btn-guardar" type="submit">Guardar regalo</button>
 						</div>
 					</form>
-				</div>
+				</div> 
 				<div class="col-md-6">
 					<div id="list-regalo">
 					<div class="row">
