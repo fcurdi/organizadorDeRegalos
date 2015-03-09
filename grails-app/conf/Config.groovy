@@ -34,6 +34,20 @@ grails.mime.types = [ // the first one is the default format
 // URL Mapping Cache Max Size, defaults to 5000
 //grails.urlmapping.cache.maxsize = 1000
 
+//Configuring mail
+grails {
+	mail {
+	  host = "smtp.gmail.com"
+	  port = 465
+	  username = "organizadorderegalos@gmail.com"
+	  password = "nomejoda"
+	  props = ["mail.smtp.auth":"true",
+			   "mail.smtp.socketFactory.port":"465",
+			   "mail.smtp.socketFactory.class":"javax.net.ssl.SSLSocketFactory",
+			   "mail.smtp.socketFactory.fallback":"false"]
+ 
+ } }
+
 // Legacy setting for codec used to encode data with ${}
 grails.views.default.codec = "html"
 

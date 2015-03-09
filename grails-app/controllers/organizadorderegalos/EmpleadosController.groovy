@@ -13,7 +13,7 @@ class EmpleadosController {
 	def guardarEmpleado(){
 		Calendar c = Calendar.getInstance();
 		def aniomesdia=params.fecha.split("-").collect{Integer.parseInt(it)};
-		c.set(aniomesdia[0],aniomesdia[1],aniomesdia[2]);
+		c.set(aniomesdia[0],aniomesdia[1]-1,aniomesdia[2]);
 		
 		 Empleado nuevo=new Empleado(nombre:params.nombre,apellido:params.apellido,
 			 dni:params.dni,fechaNacimiento:c);
@@ -34,7 +34,7 @@ class EmpleadosController {
 		if(params.fecha!="" && params.fecha!=null){
 			Calendar c = Calendar.getInstance()
 			def aniomesdia=params.fecha.split("-").collect{Integer.parseInt(it)}
-			c.set(aniomesdia[0],aniomesdia[1],aniomesdia[2])
+			c.set(aniomesdia[0],aniomesdia[1]-1,aniomesdia[2])
 			empleado.fechaNacimiento=c
 		}
 		if(!empleado.save(flush: true, failOnError: true))println("se rompio loco, no pudo guardar el empleado editado")

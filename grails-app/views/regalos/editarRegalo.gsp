@@ -343,7 +343,7 @@ padding: 5px 10px;
 				    type: "POST", 
 				    dataType: "JSON", 
 				    url: "${createLink(controller: 'Regalos', action: 'guardarRegaloEditado')}", 
-				    data: { titulo : data.title, url : data.permalink, thumbnail : data.thumbnail, anio : anio, empleadoId: empleadoId, idRegalo:"${regalo.id}", idMLA:regaloSeleccionado }, 
+				    data: { titulo : data.title, url : data.permalink, thumbnail : data.thumbnail, anio : anio, empleadoId: empleadoId, idRegalo:"${regalo.id}", idMLA:regaloSeleccionado ,costo:data.price}, 
 				    success: function(data) {
 					    alert("guardado");
 					} 

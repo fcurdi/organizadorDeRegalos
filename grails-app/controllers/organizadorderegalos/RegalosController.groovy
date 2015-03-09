@@ -12,10 +12,12 @@ class RegalosController {
 	
 	def guardarRegalo(){
 		Regalo nuevo=new Regalo(titulo : params.titulo, url : params.url,
-			thumbnail : params.thumbnail, anio : params.anio, empleado_id: params.empleadoId, idMLA:params.idMLA);
+			thumbnail : params.thumbnail, anio : params.anio, empleado_id: params.empleadoId, 
+			idMLA : params.idMLA, costo : params.costo);
 		Empleado.get(params.empleadoId).addToRegalos(nuevo);
 		nuevo.save();
 		println nuevo;
+		println params.costo
 	}
 	
 	def guardarRegaloEditado(){
@@ -26,6 +28,7 @@ class RegalosController {
 			regalo.titulo=params.titulo
 			regalo.thumbnail=params.thumbnail
 			regalo.idMLA=params.idMLA
+			regalo.costo=Float.parseFloat(params.costo)
 		}
 		if(params.anio!="" && params.anio!=null){
 			regalo.anio=Integer.parseInt(params.anio)
