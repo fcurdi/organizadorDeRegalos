@@ -2,7 +2,9 @@ package organizadorderegalos
 
 class RegalosController {
 
-    def index() { }
+    def index() { 
+		[regalos:Regalo.list()]
+	}
 	
 	def crearRegalo(){
 		[empleados:Empleado.list()]
