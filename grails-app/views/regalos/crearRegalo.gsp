@@ -299,7 +299,7 @@ padding: 5px 10px;
 			alert("Ingrese algún regalo");
 		}else{
 			$.ajax({
-				url: "https://api.mercadolibre.com/sites/MLA/search?q=\"pokemon\"&limit=10",
+				url: "https://api.mercadolibre.com/sites/MLA/search?q='"+regalo+"'&limit=10",
 				dataType:"json",
 				type:"GET",
 				success:function(data){
@@ -338,7 +338,7 @@ padding: 5px 10px;
 				    type: "POST", 
 				    dataType: "JSON", 
 				    url: "${createLink(controller: 'Regalos', action: 'guardarRegalo')}", 
-				    data: { titulo : data.title, url : data.permalink, thumbnail : data.thumbnail, anio : anio, empleadoId: empleadoId }, 
+				    data: { titulo : data.title, url : data.permalink, thumbnail : data.thumbnail, anio : anio, empleadoId: empleadoId ,idMLA:regaloSeleccionado}, 
 				    success: function(data) {
 					    alert("guardado");
 					} 
