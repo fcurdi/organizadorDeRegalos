@@ -9,12 +9,13 @@ class RegalosController {
 	}
 	
 	def guardarRegalo(){
-		Regalo nuevo=new Regalo(titulo:params.titulo,url:params.url,
-			thumbnail:params.thumbnail,anio:params.anio);
-		Empleado.get(params.idEmpleado).addToRegalos(nuevo);
-		nuevo.save();
 		
-		redirect(controller:"index",action:"index");
+		Regalo nuevo=new Regalo(titulo : params.titulo, url : params.url,
+			thumbnail : params.thumbnail, anio : params.anio, empleado_id: params.empleadoId);
+		Empleado.get(params.empleadoId).addToRegalos(nuevo);
+		nuevo.save();
+		println nuevo;
+		
 	}
 	
 	def editarRegalo(){

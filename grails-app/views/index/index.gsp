@@ -76,7 +76,7 @@
 					</ul>
 				</div>
 			</div>
-			<div class="row">
+			<div class="row" style="overflow-y: scroll; max-height: 400px;">
 				<div class="col-md-12">
 					<div id="list-empleados">
 						<table class="table table-hover ">

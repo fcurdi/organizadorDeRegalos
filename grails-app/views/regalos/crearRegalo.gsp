@@ -68,7 +68,7 @@
 			}
 			
 			.bg {
-			  background-color: #550055;
+			  background-color: rgba(249, 103, 60, 0.1);
 			}
 			
 .custom-combobox {
@@ -227,23 +227,30 @@ padding: 5px 10px;
 					</ul>
 				</div>
 			</div>
-			<form action="${ createLink(controller:"Regalos",action:"guardarRegalo", params : [])}" method="post">
-					
 			<div class="row">
 				<div class="col-md-6">
 					
 						<!-- Adentro de este form hay que poner lo de los radio buttons -->
-						<div>
-							<select id="combobox" name="idEmpleado" class="form-control">
+						<div style="text-align: center;">
+							<span>Seleccione el empleado</span>
+							<br>
+							<select id="combobox" name="idEmpleado" class="form-control" style="width: 350px;
+  margin-bottom: 40px;">
 								 <option value="" disabled selected>Buscar Empleado</option>
 								<g:each in="${empleados}" var="empleado">
 									<option value="${empleado.id}">${empleado.nombre} ${empleado.apellido} ${empleado.dni} </option>
 								</g:each>
-							</select><br>
-							<input name="anio" placeholder="Ingrese año" id="input-anio"><br>
-							
+							</select><br><br><br><br>
+							<span>Seleccione el año del regalo</span><br>
+							<input class="form-control" style="width: 100px; margin: auto; margin-bottom: 100px;" name="anio" placeholder="Ingrese año" id="input-anio"><br>
+							<button class="btn btn-default" id="btn-guardar" style="
+    background: rgb(255, 122, 82);
+    font-size: 20px;
+    color: white;
+    width: 300px;
+    height: 75px;
+">Guardar regalo</button>
 						</div>
-					
 				</div>
 				<div class="col-md-6">
 					<div id="list-regalo">
@@ -258,47 +265,55 @@ padding: 5px 10px;
 						
 						<div class="row">
 							<div class="col-md-1"></div>
-							<div class="col-md-10"  style="overflow: auto;height: 380px;">
+							<div class="col-md-10"  style="overflow: auto; height: 360px; background-color: rgba(249, 103, 60, 0.1);">
 								<table class="table table-hover" id="productos">
-									<tbody></tbody>
+									<tbody><span style="
+										    font-size: 20px;
+										    position: absolute;
+										    width: 400px;
+										    margin: auto;
+										    top: 160px;
+										    left: 0;
+										    right: 0;
+										    text-align: center;
+										    color: rgba(226, 136, 136, 0.57);
+										">Por favor, busque un regalo</span></tbody>
 								</table>
 							</div>
 							<div class="col-md-1"></div>
 						</div>
-						
 					</div>
 				</div>
-				
 			</div>
-			<button id="btn-guardar" type="submit">Guardar regalo</button>
-		</form>
 		</div>
 	</body>
 </html>
 
 <script type="text/javascript">
 	$("#btn-buscar").click(getProductos);
-	
+	$("#btn-guardar").click(guardarRegalo);
 	function getProductos(){
-	/*	$("#productos").html("");
+		$("#productos").html("");
 		var regalo = $("#search").val();
 		if(regalo == ""){
 			alert("Ingrese algún regalo");
-		}else{*/
+		}else{
 			$.ajax({
 				url: "https://api.mercadolibre.com/sites/MLA/search?q=\"pokemon\"&limit=10",
 				dataType:"json",
 				type:"GET",
 				success:function(data){
+					$("#productos").append("<tbody>");
 					for(var i=0;i<data.results.length;i++){
 						$("#productos tbody").append(
 							"<tr id="+i+" style=\"cursor: pointer;\">"+
 							"<td>"+
 								"<img src="+data.results[i].thumbnail+"></td>"
 							+"<td><a href="+data.results[i].permalink+">"+data.results[i].title+
-							"</a></td><td><input name=\"regaloSeleccionado\" id=\"regaloSeleccionado_"+i+"\" type='radio' value='"+data.results[i]+"'></td><tr>"
+							"</a></td><td><input name=\"regaloSeleccionado\" id=\"regaloSeleccionado_"+i+"\" type='radio' value='"+data.results[i].id+"'></td><tr>"
 						);
 					}
+					$("#productos").append("</tbody>");
 					 $('#productos tbody tr').on('click', function () {
 					        $(this).closest('table').find('td').removeClass('bg');
 					        $(this).find('td').addClass('bg');
@@ -306,11 +321,30 @@ padding: 5px 10px;
 					    });
 				}
 			});
-		/*}*/
+		}
 		
 	}
 
-
-	
+	function guardarRegalo(){
+		var regaloSeleccionado = $("input[name=regaloSeleccionado]:checked").val();
+		var empleadoId = $("#combobox").val();
+		var anio = $("#input-anio").val();
+		$.ajax({ 
+		    type: "get", 
+		    dataType: "JSON", 
+		    url: "https://api.mercadolibre.com/items/"+regaloSeleccionado, 
+		    success: function(data){ 
+		    	$.ajax({ 
+				    type: "POST", 
+				    dataType: "JSON", 
+				    url: "${createLink(controller: 'Regalos', action: 'guardarRegalo')}", 
+				    data: { titulo : data.title, url : data.permalink, thumbnail : data.thumbnail, anio : anio, empleadoId: empleadoId }, 
+				    success: function(data) {
+					    alert("guardado");
+					} 
+				});
+			} 
+		});
+	}
 	
 </script>
