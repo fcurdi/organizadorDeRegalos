@@ -144,6 +144,16 @@
 	</head>
 	
 	<body>
+		<div id="nav" class="col-md-6">
+			<ul>
+				<li><a href="${ createLink(controller:"Index",action:"Index")}">Últimos Regalos</a></li>
+				<li><a href="${ createLink(controller:"Empleados",action:"crearEmpleado")}">Nuevo Empleado</a></li>
+				<li><a href="${ createLink(controller:"Regalos",action:"crearRegalo")}">Nuevo Regalo</a></li>
+				<li><a href="${ createLink(controller:"Empleados",action:"elegirEmpleado")}">Eliminar/Editar Empleado</a></li>
+				<li><a href="${ createLink(controller:"Regalos",action:"elegirRegalo")}">Eliminar/Editar Regalo</a></li>	
+				<li><a href="${ createLink(controller:"Index",action:"mandarMail")}">Mandar Mails</a></li>
+			</ul>
+		</div>
 		<form action="${ createLink(controller:"Empleados",action:"accionEmpleado")}" method="post">
 			<div class="ui-widget">
 			<label>Elegir Empleado: </label>

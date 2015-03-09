@@ -18,6 +18,7 @@ class EmpleadosController {
 		 Empleado nuevo=new Empleado(nombre:params.nombre,apellido:params.apellido,
 			 dni:params.dni,fechaNacimiento:c);
 		 nuevo.save();
+		 redirect(controller:"index",action:"index")
 	}
 	
 	def guardarEmpleadoEditado(){
