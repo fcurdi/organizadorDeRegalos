@@ -10,6 +10,7 @@ class IndexController {
 		def hoy=new Date()
 		def gasto=Regalo.list().findAll{it.empleado.fechaNacimiento.get(Calendar.MONTH)==(hoy.month) && 
 			it.anio==(hoy.getYear())+1900}.sum{it.costo}
+		if(gasto==null)gasto=0;
 		println gasto
 		sendMail {
 			to "eric.brandwein@mercadolibre.com"
