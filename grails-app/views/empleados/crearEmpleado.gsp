@@ -79,7 +79,7 @@
 					</ul>
 				</div>
 			</div>
-			<div class="row" style="height: 400px;">
+			<div class="row" style="height: 300px;">
 				<div class="col-md-12">
 					<div id="list-empleados" style="text-align:center;">
 						<form action="${ createLink(controller:"Empleados",action:"guardarEmpleado")}" method="post">
