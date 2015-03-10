@@ -22,7 +22,7 @@
 				content: '';
 				top: 0;
 				left: 0;
-				background-color: rgb(255, 232, 0);
+				background-color: rgb(0, 148, 255);
 			}
 			
 			#container {
@@ -65,7 +65,7 @@
 			<div class="row">
 				<div class="col-md-6">
 					<div id="title" style="float: left;">
-						Organizador de Regalos
+						Crear Empleado
 					</div>
 				</div>
 				<div id="nav" class="col-md-6">
