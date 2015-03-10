@@ -1,92 +1,12 @@
 <html>
 	<head>
+		<meta name="layout" content="main">
+		<link rel="stylesheet" href="createLink(${})"/>
 		<link rel="stylesheet" href="//code.jquery.com/ui/1.11.3/themes/smoothness/jquery-ui.css">
 		<script src="//code.jquery.com/jquery-1.11.2.min.js"></script>
 		<script src="//code.jquery.com/ui/1.11.3/jquery-ui.js"></script>
-		<link rel="stylesheet" href="/resources/demos/style.css">
-		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
-		<link href='http://fonts.googleapis.com/css?family=Roboto:300,100' rel='stylesheet' type='text/css'>
+		<link rel="stylesheet" href="/resources/demos/style.css">	
 		
-		<style>
-			body {
-				font-family: Roboto;
-				font-size: 14px;
-				color: #37474f;
-				background-color: #F4F4F4;
-			}
-			
-			#background {
-				position: absolute;
-				z-index: 1;
-				width: 100%;
-				height: 222px;
-				content: '';
-				top: 0;
-				left: 0;
-				background-color: rgb(249, 103, 60);
-			}
-			
-			#container {
-				position: absolute;
-				min-height: 85%;
-				top: 50px;
-				left: 50px;
-				right: 50px;
-				background-color: rgb(253, 253, 253);
-				box-shadow: 0px 2px 12px #B2B2B2;
-				z-index: 2;
-				margin-bottom: 50px;
-			}
-			
-			#title {
-				text-align: center;
-				font-size: 40px;
-				font-weight: 100;
-				padding: 30px;
-			}
-			
-			#nav {
-				text-align: center;
-				padding: 45px;
-				font-size: 20px;
-			}
-			
-			#list-empleados{
-				text-align: center;
-			}
-			
-			a:hover { text-underline: none; border-bottom: 1px solid red; }
-			ul { text-align : center }
-			ul li { display: inline; white-space: nowrap; margin-right: 20px; }
-			::-webkit-scrollbar {
-			    width: 10px;
-			}
-			 
-			/* Handle */
-			::-webkit-scrollbar-thumb {
-			    background: rgba(200,0,0,0.1); 
-			}
-			
-			.bg {
-			  background-color: rgba(249, 103, 60, 0.1);
-			}
-			
-.custom-combobox {
-position: relative;
-display: inline-block;
-}
-.custom-combobox-toggle {
-position: absolute;
-top: 0;
-bottom: 0;
-margin-left: -1px;
-padding: 0;
-}
-.custom-combobox-input {
-margin: 0;
-padding: 5px 10px;
-}
-</style>
 		<script>
 		(function( $ ) {
 			$.widget( "custom.combobox", {
