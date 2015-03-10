@@ -71,6 +71,7 @@
 				<div id="nav" class="col-md-6">
 					<ul>
 						<li><a href="${ createLink(controller:"Index",action:"Index")}">Últimos Regalos</a></li>
+						<li><a href="${ createLink(controller:"Empleados",action:"Index")}">Ver Empleados</a></li>
 						<li><a href="${ createLink(controller:"Empleados",action:"crearEmpleado")}">Nuevo Empleado</a></li>
 						<li><a href="${ createLink(controller:"Regalos",action:"crearRegalo")}">Nuevo Regalo</a></li>
 						<li><a href="${ createLink(controller:"Empleados",action:"elegirEmpleado")}">Eliminar/Editar Empleado</a></li>
