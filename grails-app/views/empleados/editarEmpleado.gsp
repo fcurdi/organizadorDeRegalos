@@ -83,10 +83,10 @@
 				<div class="col-md-12">
 					<div id="list-empleados" style="text-align:center;">	 
 						 <form action="${ createLink(controller:"Empleados",action:"guardarEmpleadoEditado",params:[idEmpleado:empleado.id])}" method="post">
-							<input class="form-control" style="width: 300px; margin: auto;" id="input-nombre" name="nombre" placeholder="Nombre"/><br>
-							<input class="form-control" style="width: 300px; margin: auto;" id="input-apellido" name="apellido" placeholder="Apellido"/><br>
-							<input class="form-control" style="width: 300px; margin: auto;" id="input-dni" name="dni" placeholder="DNI"/><br>
-							<input class="form-control" style="width: 300px; margin: auto;" type="text" id="input-fecha" name="fecha" placeholder="Fecha De Nacimiento"/><br>
+							<input class="form-control" style="width: 300px; margin: auto;" id="input-nombre" name="nombre" placeholder="${empleado.nombre}"/><br>
+							<input class="form-control" style="width: 300px; margin: auto;" id="input-apellido" name="apellido" placeholder="${empleado.apellido}"/><br>
+							<input class="form-control" style="width: 300px; margin: auto;" id="input-dni" name="dni" placeholder="${empleado.dni}"/><br>
+							<input class="form-control" style="width: 300px; margin: auto;" type="text" id="input-fecha" name="fecha" placeholder="${empleado.fechaNacimiento.format("yyyy-MM-dd")}"/><br>
 							<button class="btn btn-default" id="btn-nuevo" type="submit">Editar empleado</button>
 						 </form>
 					</div>

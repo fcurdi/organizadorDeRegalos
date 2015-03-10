@@ -105,10 +105,10 @@
 				 	}
 				 	// Remove invalid value
 				 	this.input
-				 		.val( "" )
-				 		.attr( "title", value + " didn't match any item" )
+				 		.val("${empleados[0].nombre} ${empleados[0].apellido} ${empleados[0].dni}" )
+				 		.attr( "title", "Por favor elija un empleado")
 				 		.tooltip( "open" );
-				 	this.element.val( "" );
+				 	this.element.val( "${empleados[0].id}" );
 				 	this._delay(function() {
 				 		this.input.tooltip( "close" ).attr( "title", "" );
 				 	}, 2500 );
@@ -224,7 +224,6 @@
 							<div class="ui-widget">
 							<label>Elegir Empleado: </label>
 							<select id="combobox" name="idEmpleado">
-								<option value="">Select one...</option>
 								<g:each in="${empleados}" var="empleado">
 									<option value="${empleado.id}">${empleado.nombre} ${empleado.apellido} ${empleado.dni}</option>
 								</g:each>
