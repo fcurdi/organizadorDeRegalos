@@ -8,6 +8,7 @@ class Empleado {
 	static hasMany = [regalos: Regalo]
 	
     static constraints = {
+		dni unique:true
     }
 	
 }
