@@ -71,22 +71,22 @@
 			  background-color: rgba(249, 103, 60, 0.1);
 			}
 			
-.custom-combobox {
-position: relative;
-display: inline-block;
-}
-.custom-combobox-toggle {
-position: absolute;
-top: 0;
-bottom: 0;
-margin-left: -1px;
-padding: 0;
-}
-.custom-combobox-input {
-margin: 0;
-padding: 5px 10px;
-}
-</style>
+			.custom-combobox {
+			position: relative;
+			display: inline-block;
+			}
+			.custom-combobox-toggle {
+			position: absolute;
+			top: 0;
+			bottom: 0;
+			margin-left: -1px;
+			padding: 0;
+			}
+			.custom-combobox-input {
+			margin: 0;
+			padding: 5px 10px;
+			}
+		</style>
 		<script>
 		(function( $ ) {
 			$.widget( "custom.combobox", {
@@ -248,12 +248,12 @@ padding: 5px 10px;
 							<span>Seleccione el año del regalo</span><br>
 							<input class="form-control" style="width: 100px; margin: auto; margin-bottom: 100px;" name="anio" placeholder="Ingrese año" id="input-anio"><br>
 							<button class="btn btn-default" id="btn-guardar" style="
-    background: rgb(255, 122, 82);
-    font-size: 20px;
-    color: white;
-    width: 300px;
-    height: 75px;
-">Guardar regalo</button>
+							    background: rgb(255, 122, 82);
+							    font-size: 20px;
+							    color: white;
+							    width: 300px;
+							    height: 75px;
+							">Guardar regalo</button>
 						</div>
 				</div>
 				<div class="col-md-6">
@@ -342,7 +342,7 @@ padding: 5px 10px;
 				    type: "POST", 
 				    dataType: "JSON", 
 				    url: "${createLink(controller: 'Regalos', action: 'guardarRegalo')}", 
-				    data: { titulo : data.title, url : data.permalink, thumbnail : data.thumbnail, anio : anio, empleadoId: empleadoId ,idMLA:regaloSeleccionado, costo:data.price}, 
+				    data: { titulo : data.title, url : data.permalink, thumbnail : data.thumbnail, anio : anio, empleadoId: empleadoId ,idMLA:regaloSeleccionado}, 
 				    success: function(data) {
 					    alert("guardado");
 					} 

@@ -14,11 +14,11 @@ class RegalosController {
 		if(!Empleado.get(params.empleadoId).regalos.find{it.anio==Integer.parseInt(params.anio)}){
 			Regalo nuevo=new Regalo(titulo : params.titulo, url : params.url,
 				thumbnail : params.thumbnail, anio : params.anio, empleado_id: params.empleadoId, 
-				idMLA : params.idMLA, costo : params.costo);
+				idMLA : params.idMLA);
 			Empleado.get(params.empleadoId).addToRegalos(nuevo);
 			nuevo.save(flush:true);
 			println nuevo;
-			println params.costo
+			//println params.costo
 		}
 	}
 	
@@ -30,7 +30,7 @@ class RegalosController {
 			regalo.titulo=params.titulo
 			regalo.thumbnail=params.thumbnail
 			regalo.idMLA=params.idMLA
-			regalo.costo=Float.parseFloat(params.costo)
+			//regalo.costo=Float.parseFloat(params.costo)
 		}
 		if(params.empleadoId!="" && params.empleadoId!=null){
 			regalo.empleado.removeFromRegalos(regalo)
