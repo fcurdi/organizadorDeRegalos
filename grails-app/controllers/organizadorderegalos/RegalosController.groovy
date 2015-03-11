@@ -11,13 +11,15 @@ class RegalosController {
 	}
 	
 	def guardarRegalo(){
-		Regalo nuevo=new Regalo(titulo : params.titulo, url : params.url,
-			thumbnail : params.thumbnail, anio : params.anio, empleado_id: params.empleadoId, 
-			idMLA : params.idMLA, costo : params.costo);
-		Empleado.get(params.empleadoId).addToRegalos(nuevo);
-		nuevo.save();
-		println nuevo;
-		println params.costo
+		if(!Empleado.get(params.empleadoId).regalos.find{it.anio==Integer.parseInt(params.anio)}){
+			Regalo nuevo=new Regalo(titulo : params.titulo, url : params.url,
+				thumbnail : params.thumbnail, anio : params.anio, empleado_id: params.empleadoId, 
+				idMLA : params.idMLA, costo : params.costo);
+			Empleado.get(params.empleadoId).addToRegalos(nuevo);
+			nuevo.save(flush:true);
+			println nuevo;
+			println params.costo
+		}
 	}
 	
 	def guardarRegaloEditado(){
@@ -30,12 +32,13 @@ class RegalosController {
 			regalo.idMLA=params.idMLA
 			regalo.costo=Float.parseFloat(params.costo)
 		}
-		if(params.anio!="" && params.anio!=null){
-			regalo.anio=Integer.parseInt(params.anio)
-		}
 		if(params.empleadoId!="" && params.empleadoId!=null){
 			regalo.empleado.removeFromRegalos(regalo)
 			Empleado.get(params.empleadoId).addToRegalos(regalo)
+		}
+		if(params.anio!="" && params.anio!=null && 
+			!(Regalo.get(params.idRegalo).empleado.regalos.find{it.anio==Integer.parseInt(params.anio)})){
+			regalo.anio=Integer.parseInt(params.anio)
 		}
 		println "se guardo bien"
 		if(!regalo.save(flush: true, failOnError: true))println("se rompio loco, no pudo guardar el regalo editado")

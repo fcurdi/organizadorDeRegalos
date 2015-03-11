@@ -1,11 +1,92 @@
 <html>
 	<head>
-		<meta name="layout" content="main">
 		<link rel="stylesheet" href="//code.jquery.com/ui/1.11.3/themes/smoothness/jquery-ui.css">
 		<script src="//code.jquery.com/jquery-1.11.2.min.js"></script>
 		<script src="//code.jquery.com/ui/1.11.3/jquery-ui.js"></script>
-		<link rel="stylesheet" href="/resources/demos/style.css">	
+		<link rel="stylesheet" href="/resources/demos/style.css">
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+		<link href='http://fonts.googleapis.com/css?family=Roboto:300,100' rel='stylesheet' type='text/css'>
 		
+		<style>
+			body {
+				font-family: Roboto;
+				font-size: 14px;
+				color: #37474f;
+				background-color: #F4F4F4;
+			}
+			
+			#background {
+				position: absolute;
+				z-index: 1;
+				width: 100%;
+				height: 222px;
+				content: '';
+				top: 0;
+				left: 0;
+				background-color: rgb(249, 103, 60);
+			}
+			
+			#container {
+				position: absolute;
+				min-height: 85%;
+				top: 50px;
+				left: 50px;
+				right: 50px;
+				background-color: rgb(253, 253, 253);
+				box-shadow: 0px 2px 12px #B2B2B2;
+				z-index: 2;
+				margin-bottom: 50px;
+			}
+			
+			#title {
+				text-align: center;
+				font-size: 40px;
+				font-weight: 100;
+				padding: 30px;
+			}
+			
+			#nav {
+				text-align: center;
+				padding: 45px;
+				font-size: 20px;
+			}
+			
+			#list-empleados{
+				text-align: center;
+			}
+			
+			a:hover { text-underline: none; border-bottom: 1px solid red; }
+			ul { text-align : center }
+			ul li { display: inline; white-space: nowrap; margin-right: 20px; }
+			::-webkit-scrollbar {
+			    width: 10px;
+			}
+			 
+			/* Handle */
+			::-webkit-scrollbar-thumb {
+			    background: rgba(200,0,0,0.1); 
+			}
+			
+			.bg {
+			  background-color: rgba(249, 103, 60, 0.1);
+			}
+			
+.custom-combobox {
+position: relative;
+display: inline-block;
+}
+.custom-combobox-toggle {
+position: absolute;
+top: 0;
+bottom: 0;
+margin-left: -1px;
+padding: 0;
+}
+.custom-combobox-input {
+margin: 0;
+padding: 5px 10px;
+}
+</style>
 		<script>
 		(function( $ ) {
 			$.widget( "custom.combobox", {
@@ -130,43 +211,28 @@
 	</head>
 	
 	<body>
+		<div id="background"></div>
+		<div id="container">
+			<div class="row">
 				<div class="col-md-6">
-					<div id="list-regalo">
-						<div class="row">
-							<div class="col-md-1"></div>
-	overflow: auto; height: 360px; background-color: rgba(249, 103, 60, 0.1);							<input id="search" style="margin: auto; display: inline; margin-botto<span style="
-										    font-size: 20px;
-										    position: absolute;
-										    width: 400px;
-										    margin: auto;
-										    top: 160px;
-										    left: 0;
-										    right: 0;
-										    text-align: center;
-										    color: rgba(226, 136, 136, 0.57);
-										">Por favor, busque un regalo</span>class="row">
-							<div class="col-md-1"></div>
-							<div class="col-md-10"  style="overflow: auto; height: 360px; background-color: rgba(249, 103, 60, 0.1);">
-								<table class="table table-hover" id="productos">
-	$("#btn-guardar").click(guardarRegalo);    font-size: 20px;
-										    position: absolute;
-										    width: 400px;
-										    margin: auto;
-										    top: 160px;
-										    left: 0;
-										    right: 0;
-										    text-align: center;
-										    color: rgba(226, 136, 136, 0.57);
-										">Por favor, busque un regalo</spa
-					$("#productos").append("<tbody>");>
-							<div class="col-md-1"></div>
-						</div>
+					<div id="title" style="float: left;">
+						Nuevo Regalo
 					</div>
-					
-					
-				
-		</div>
-		<div class="col-md-6">
+				</div>
+				<div id="nav" class="col-md-6">
+					<ul>
+						<li><a href="${ createLink(controller:"Index",action:"Index")}">Últimos Regalos</a></li>
+						<li><a href="${ createLink(controller:"Empleados",action:"Index")}">Ver Empleados</a></li>
+						<li><a href="${ createLink(controller:"Empleados",action:"crearEmpleado")}">Nuevo Empleado</a></li>
+						<li><a href="${ createLink(controller:"Regalos",action:"crearRegalo")}">Nuevo Regalo</a></li>
+						<li><a href="${ createLink(controller:"Empleados",action:"elegirEmpleado")}">Eliminar/Editar Empleado</a></li>
+						<li><a href="${ createLink(controller:"Regalos",action:"elegirRegalo")}">Eliminar/Editar Regalo</a></li>	
+						<li><a href="${ createLink(controller:"Index",action:"mandarMail")}">Mandar Mails</a></li>
+					</ul>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-md-6">
 					
 						<!-- Adentro de este form hay que poner lo de los radio buttons -->
 						<div style="text-align: center;">
@@ -190,7 +256,40 @@
 ">Guardar regalo</button>
 						</div>
 				</div>
-				
+				<div class="col-md-6">
+					<div id="list-regalo">
+						<div class="row">
+							<div class="col-md-1"></div>
+							<div class="col-md-10" style="margin: auto; text-align: center;">
+								<input id="search" style="margin: auto; display: inline; margin-bottom: 20px; width: 70%;" type="text" class="form-control" placeholder="Buscar Regalo">
+								<button type="button" id="btn-buscar" class="btn btn-default" style="height: 34px; vertical-align: top;"><span class="glyphicon glyphicon-search"></span></button>
+							</div>
+							<div class="col-md-1"></div>
+						</div>
+						
+						<div class="row">
+							<div class="col-md-1"></div>
+							<div class="col-md-10"  style="overflow: auto; height: 360px; background-color: rgba(249, 103, 60, 0.1);">
+								<table class="table table-hover" id="productos">
+									<tbody><span style="
+										    font-size: 20px;
+										    position: absolute;
+										    width: 400px;
+										    margin: auto;
+										    top: 160px;
+										    left: 0;
+										    right: 0;
+										    text-align: center;
+										    color: rgba(226, 136, 136, 0.57);
+										">Por favor, busque un regalo</span></tbody>
+								</table>
+							</div>
+							<div class="col-md-1"></div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
 	</body>
 </html>
 
@@ -203,8 +302,9 @@
 		if(regalo == ""){
 			alert("Ingrese algún regalo");
 		}else{
-			$.ajax({'"+data.results[i].id+.mercadolibre.com/sites/MLA/s
-					$("#productos").append("</tbody>");ype:"json",
+			$.ajax({
+				url: "https://api.mercadolibre.com/sites/MLA/search?q='"+regalo+"'&limit=10",
+				dataType:"json",
 				type:"GET",
 				success:function(data){
 					$("#productos").append("<tbody>");
@@ -212,27 +312,26 @@
 						$("#productos tbody").append(
 							"<tr id="+i+" style=\"cursor: pointer;\">"+
 							"<td>"+
-								"<img src="+data.results	function guardarRegalo(){
+								"<img src="+data.results[i].thumbnail+"></td>"
+							+"<td><a href="+data.results[i].permalink+">"+data.results[i].title+
+							"</a></td><td><input name=\"regaloSeleccionado\" id=\"regaloSeleccionado_"+i+"\" type='radio' value='"+data.results[i].id+"'></td><tr>"
+						);
+					}
+					$("#productos").append("</tbody>");
+					 $('#productos tbody tr').on('click', function () {
+					        $(this).closest('table').find('td').removeClass('bg');
+					        $(this).find('td').addClass('bg');
+						    $(this).find('tr input:radio').prop('checked', true);
+					    });
+				}
+			});
+		}
+		
+	}
+
+	function guardarRegalo(){
 		var regaloSeleccionado = $("input[name=regaloSeleccionado]:checked").val();
 		var empleadoId = $("#combobox").val();
-		var anio = $("#input-anio").val();
-		$.ajax({ 
-		    type: "get", 
-		    dataType: "JSON", 
-		    url: "https://api.mercadolibre.com/items/"+regaloSeleccionado, 
-		    success: function(data){ 
-		    	$.ajax({ 
-				    type: "POST", 
-				    dataType: "JSON", 
-				    url: "${createLink(controller: 'Regalos', action: 'guardarRegalo')}", 
-				    data: { titulo : data.title, url : data.permalink, thumbnail : data.thumbnail, anio : anio, empleadoId: empleadoId }, 
-				    success: function(data) {
-					    alert("guardado");
-					} 
-				});
-			} 
-		});
-	}ox").val();
 		var anio = $("#input-anio").val();
 		$.ajax({ 
 		    type: "get", 
