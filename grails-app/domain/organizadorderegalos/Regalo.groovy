@@ -1,5 +1,7 @@
 package organizadorderegalos
 
+import grails.rest.*
+@Resource(uri="/api/regalos")
 class Regalo {
 	String titulo
 	String url
