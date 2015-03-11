@@ -19,7 +19,7 @@
 					</div>
 				</div>
 				<div id="nav" class="col-md-8 vcenter">
-					<ul>
+					<ul> 
 						<li><a href="${ createLink(controller:"Index",action:"index")}">HOME</a></li>
 						<li><a href="${ createLink(controller:"Empleados",action:"crearEmpleado")}">NUEVO EMPLEADO</a></li>
 						<li><a href="${ createLink(controller:"Regalos",action:"crearRegalo")}">NUEVO REGALO</a></li>	
