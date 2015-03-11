@@ -1,5 +1,7 @@
 package organizadorderegalos
 
+import groovy.json.JsonSlurper
+
 class IndexController {
 
     def index() {
@@ -8,8 +10,14 @@ class IndexController {
 	
 	def mandarMail(){
 		def hoy=new Date()
-		def gasto=Regalo.list().findAll{it.empleado.fechaNacimiento.get(Calendar.MONTH)==(hoy.month) && 
-			it.anio==(hoy.getYear())+1900}.sum{it.costo}
+		def regalosDelMes=Regalo.list().findAll{it.empleado.fechaNacimiento.get(Calendar.MONTH)==(hoy.month) && 
+			it.anio==(hoy.getYear())+1900}
+		def gasto=regalosDelMes.collect{regalo ->
+			def json =new URL("https://api.mercadolibre.com/items/"+regalo.idMLA)
+				.getText(requestProperties:[Accept: "application/json"])
+			def precio=new JsonSlurper().parseText(json).price
+			return precio
+		}.sum{it}
 		if(gasto==null)gasto=0;
 		println gasto
 		sendMail {
@@ -18,7 +26,6 @@ class IndexController {
 			body ('Este mes se gastaran '+gasto.toString())
 		  }
 		println hoy.getYear()+1900
-		//Regalo.list().each{println it.empleado.fechaNacimiento.get(Calendar.MONTH)}
 		println hoy.month
 	}
 }

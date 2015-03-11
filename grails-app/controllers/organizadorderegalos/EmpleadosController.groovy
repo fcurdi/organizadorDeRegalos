@@ -15,10 +15,12 @@ class EmpleadosController {
 		def aniomesdia=params.fecha.split("-").collect{Integer.parseInt(it)};
 		c.set(aniomesdia[0],aniomesdia[1]-1,aniomesdia[2]);
 		
-		 Empleado nuevo=new Empleado(nombre:params.nombre,apellido:params.apellido,
-			 dni:params.dni,fechaNacimiento:c);
-		 nuevo.save();
-		 redirect(controller:"index",action:"index")
+		if (!Empleado.findByDni(params.dni)){
+			Empleado nuevo=new Empleado(nombre:params.nombre,apellido:params.apellido,
+				dni:params.dni,fechaNacimiento:c);
+			nuevo.save();
+		}
+		redirect(controller:"index",action:"index")
 	}
 	
 	def guardarEmpleadoEditado(){
@@ -29,7 +31,7 @@ class EmpleadosController {
 		if(params.apellido!="" && params.apellido!=null){
 			empleado.apellido=params.apellido
 		}
-		if(params.dni!="" && params.dni!=null){
+		if(params.dni!="" && params.dni!=null && !Empleado.findByDni(params.dni)){
 			empleado.dni=params.dni
 		}
 		if(params.fecha!="" && params.fecha!=null){

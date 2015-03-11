@@ -24,7 +24,6 @@
 				color: rgb(255, 97, 40);
 			}
 		</style>
-
 	</head>
 	
 	<body>
@@ -41,10 +40,10 @@
 			<div class="row">
 				<div class="col-md-1"></div>
 				<div class="col-md-10"  style="overflow: auto; height: 360px; background-color: rgba(255, 58, 0, 0.12);">
-				<table class="table table-hover" id="productos">
-					<div id="info-search" class="info-search">Por favor, busque un regalo</div>
-					<tbody></tbody>
-				</table>
+					<table class="table table-hover" id="productos">
+						<div id="info-search" class="info-search">Por favor, busque un regalo</div>
+						<tbody></tbody>
+					</table>
 				</div>
 				<div class="col-md-1"></div>
 			</div>
@@ -122,7 +121,7 @@
 						    type: "POST", 
 						    dataType: "JSON", 
 						    url: "${createLink(controller: 'Regalos', action: 'guardarRegalo')}", 
-						    data: { titulo : data.title, url : data.permalink, thumbnail : data.thumbnail, anio : anio, empleadoId: empleadoId ,idMLA:regaloSeleccionado, costo:data.price}, 
+						    data: { titulo : data.title, url : data.permalink, thumbnail : data.thumbnail, anio : anio, empleadoId: empleadoId ,idMLA:regaloSeleccionado}, 
 						    success: function(data) {
 							    alert("guardado");
 							} 
