@@ -38,6 +38,13 @@ body {
 	float: right;
 	padding: 45px;
 	font-size: 20px;
+	font-weight: 100;
+}
+
+.vcenter {
+    display: inline-block;
+    vertical-align: middle;
+    float: none;
 }
 
 #list-empleados{

@@ -18,7 +18,7 @@
 						${ titulo }
 					</div>
 				</div>
-				<div id="nav" class="col-md-8">
+				<div id="nav" class="col-md-8 vcenter">
 					<ul>
 						<li><a href="${ createLink(controller:"Index",action:"index")}">HOME</a></li>
 						<li><a href="${ createLink(controller:"Empleados",action:"crearEmpleado")}">NUEVO EMPLEADO</a></li>

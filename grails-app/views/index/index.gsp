@@ -6,7 +6,7 @@
 	<body>
 		<div class="col-md-12">
 			<g:set var="titulo" value="Home" scope="request"/>
-			<div id="list-empleados">
+			<div id="list-empleados">	
 				<table class="table table-hover ">
 					<thead>
 						<tr>
