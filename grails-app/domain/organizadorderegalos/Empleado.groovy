@@ -11,6 +11,13 @@ class Empleado {
 	
     static constraints = {
 		dni unique:true
+		dni size:7..8
+		nombre validator:{
+			it==~/^[A-Za-z\s]+$/
+		}
+		apellido validator:{
+			it==~/^[A-Za-z\s]+$/
+		}
     }
 	
 }

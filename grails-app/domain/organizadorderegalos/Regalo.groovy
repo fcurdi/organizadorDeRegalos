@@ -11,5 +11,6 @@ class Regalo {
 	static belongsTo = [empleado: Empleado]
 	
     static constraints = {
+    	anio unique:'empleado'
     }
 }
