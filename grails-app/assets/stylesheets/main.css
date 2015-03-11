@@ -47,7 +47,7 @@ body {
     float: none;
 }
 
-#list-empleados{
+.box{
 	text-align: center;
 }
 
@@ -61,7 +61,12 @@ body {
 
 
 a {
+	text-underline: none;
 	color: #8E8E8E;
+}
+
+a:link {
+    text-decoration: none;
 }
 
 a:hover { 
@@ -69,10 +74,10 @@ a:hover {
 	border: 0; 
 }
 
-a:focus {
-	text-underline: none;
-	border: 0; 
+a:focus, a:hover {
+	color: #FFE800;
 }
+
 ul { 
 	text-align : center;
 }
@@ -81,4 +86,9 @@ ul li {
 	display: inline; 
 	white-space: nowrap; 
 	margin-right: 20px; 
+}
+
+.form-control[readonly] {
+	cursor: pointer;
+	background-color: #FFF;
 }
