@@ -157,7 +157,6 @@
 						    data: { titulo : data.title, url : data.permalink, thumbnail : data.thumbnail, anio : anio, empleadoId: empleadoId ,idMLA:regaloSeleccionado}, 
 						    success: function(data) {
 								$( "#alert-box" ).fadeIn('fast').delay(1000).fadeOut('fast');
-			        			$('#crearEmpleado').trigger("reset");
 							} 
 						});
 					} 
