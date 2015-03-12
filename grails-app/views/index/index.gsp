@@ -5,7 +5,9 @@
 	</head>
 	<body>
 		<g:set var="titulo" value="Home" scope="request"/>
-		<div class="col-md-12 box">
+		<div class="col-md-12 box" style="max-height: 400px;">
+			${today}
+			${cal}
 			<table class="table table-hover ">
 				<thead>
 					<tr>

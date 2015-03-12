@@ -18,7 +18,6 @@ class RegalosController {
 			Empleado.get(params.empleadoId).addToRegalos(nuevo);
 			nuevo.save(flush:true);
 			println nuevo;
-			//println params.costo
 		}
 	}
 	

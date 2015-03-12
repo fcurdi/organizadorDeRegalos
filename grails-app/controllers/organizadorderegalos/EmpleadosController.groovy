@@ -11,13 +11,9 @@ class EmpleadosController {
 	}
 	
 	def guardarEmpleado(){
-		Calendar c = Calendar.getInstance();
-		def aniomesdia=params.fecha.split("-").collect{Integer.parseInt(it)};
-		c.set(aniomesdia[0],aniomesdia[1]-1,aniomesdia[2]);
-		
 		if (!Empleado.findByDni(params.dni)){
 			Empleado nuevo=new Empleado(nombre:params.nombre,apellido:params.apellido,
-				dni:params.dni,fechaNacimiento:c);
+				dni:params.dni,fechaNacimiento:params.fecha);
 			nuevo.save();
 		}
 		redirect(controller:"index",action:"index")
@@ -35,10 +31,7 @@ class EmpleadosController {
 			empleado.dni=params.dni
 		}
 		if(params.fecha!="" && params.fecha!=null){
-			Calendar c = Calendar.getInstance()
-			def aniomesdia=params.fecha.split("-").collect{Integer.parseInt(it)}
-			c.set(aniomesdia[0],aniomesdia[1]-1,aniomesdia[2])
-			empleado.fechaNacimiento=c
+			empleado.fechaNacimiento=params.fecha
 		}
 		if(!empleado.save(flush: true, failOnError: true))println("se rompio loco, no pudo guardar el empleado editado")
 		redirect(controller:"index",action:"index")

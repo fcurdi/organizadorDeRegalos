@@ -23,6 +23,37 @@
 			a:hover, a:focus {
 				color: rgb(255, 97, 40);
 			}
+
+			.table>a {
+				color: red;
+			}
+
+			.table>tbody>tr:hover {
+				background: rgba(255, 58, 0, 0.20);
+			}
+
+			.table>tbody>tr>td {
+				vertical-align: middle;
+			}
+
+			.alert-box {
+				width: 400px;
+				height: 100px;
+				position: absolute;
+				z-index: 1;
+				margin: auto;
+				left: 0;
+				right: 0;
+				top: 0;
+				bottom: 0;
+				color: #fff;
+				font-size: 24px;
+				text-align: center;
+				padding: 20px;
+				background-color: rgb(255, 97, 40);
+				display: none;
+			}
+
 		</style>
 	</head>
 	
@@ -48,12 +79,12 @@
 				<div class="col-md-1"></div>
 			</div>
 		</div>
-		
+
 		<div class="col-md-6">
 			<div style="text-align: center; margin: auto; margin-top: 30px; margin-bottom: 30px;">
 				<div class="form-group">
 					<label for="inputNombre">Seleccione el empleado</label>
-					<select name="idEmpleado" class="form-control" style="width: 300px; margin: auto;">
+					<select id="combobox" name="idEmpleado" class="form-control" style="width: 300px; margin: auto;">
 						<option value="" disabled selected>Buscar Empleado</option>
 						<g:each in="${empleados}" var="empleado">
 							<option value="${empleado.id}">${empleado.nombre} ${empleado.apellido} ${empleado.dni} </option>
@@ -66,15 +97,17 @@
 					<input class="form-control" style="width: 100px; margin: auto;" name="anio" placeholder="Ingrese año" id="input-anio">
 				</div>
 				
-				<button class="btn btn-default" id="btn-guardar" 
-				
+				<button class="btn btn-default" id="btn-guardar" onClick="guardarRegalo"
 				style="background: rgb(249, 116, 68); font-size: 16px; color: white; width: 150px; height: 50px;">Guardar regalo</button>
 			</div>
 		</div>
-		
+		<div id="dialog" class="alert-box">
+			Regalado!
+		</div>
 		<script>
 			$("#btn-buscar").click(getProductos);
 			$("#btn-guardar").click(guardarRegalo);
+			
 			function getProductos(){
 				$("#productos").html("");
 				var regalo = $("#search").val();
@@ -101,8 +134,8 @@
 							$('#productos tbody tr').on('click', function () {
 								$(this).closest('table').find('td').removeClass('bg');
 						        $(this).find('td').addClass('bg');
-							    $(this).find('tr input:radio').prop('checked', true);
-						    });
+							    $(this).find('input:radio').prop('checked', true);
+							});
 						}
 					});
 				}
@@ -123,7 +156,8 @@
 						    url: "${createLink(controller: 'Regalos', action: 'guardarRegalo')}", 
 						    data: { titulo : data.title, url : data.permalink, thumbnail : data.thumbnail, anio : anio, empleadoId: empleadoId ,idMLA:regaloSeleccionado}, 
 						    success: function(data) {
-							    alert("guardado");
+								$( "#alert-box" ).fadeIn('fast').delay(1000).fadeOut('fast');
+			        			$('#crearEmpleado').trigger("reset");
 							} 
 						});
 					} 
