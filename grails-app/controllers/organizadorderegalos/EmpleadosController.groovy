@@ -37,7 +37,10 @@ class EmpleadosController {
 			empleado.dni=params.dni
 		}
 		if(params.fecha!="" && params.fecha!=null){
-			empleado.fechaNacimiento=params.fecha
+			def aniomesdia=params.fecha.split("-").collect{Integer.parseInt(it)}
+			def fecha=new Date()
+			fecha.set(year:aniomesdia[0],month:aniomesdia[1]-1,date:aniomesdia[2])
+			empleado.fechaNacimiento=fecha
 		}
 		if(!empleado.save(flush: true, failOnError: true))println("se rompio loco, no pudo guardar el empleado editado")
 		redirect(controller:"index",action:"index")
