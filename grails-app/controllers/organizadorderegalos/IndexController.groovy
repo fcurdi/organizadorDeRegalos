@@ -5,7 +5,12 @@ import groovy.json.JsonSlurper
 class IndexController {
 
     def index() {
-		[regalos: Regalo.list(), empleados: Empleado.list()]
+    	def today = new Date()
+		[regalos: Regalo.list().findAll{
+			it.anio==today.year &&
+			it.empleado.fechaNacimiento.date==today.date &&
+			it.empleado.fechaNacimiento.month==today.month},
+		empleados: Empleado.list()]
 	}
 	
 	def mandarMail(){

@@ -11,7 +11,7 @@
 			$(document).ready(function(){
 				$( "#input-fecha" ).datepicker();
 				$( "#input-fecha" ).datepicker("option","dateFormat", "yy-mm-dd" );
-				
+
 				$('#crearEmpleado').validate({
 			        rules: {
 			            nombre: {
@@ -30,11 +30,6 @@
 					        required: true
 					    }
 			        },
-			        submitHandler: function(form) { // for demo
-			        	$( "#dialog" ).fadeIn('fast').delay(1000).fadeOut('fast');
-			        	$('#crearEmpleado').trigger("reset");
-			            return false;
-			        },
 			        messages: {
 			            nombre: {
 			            	required: "Por favor complete su nombre",
@@ -51,8 +46,20 @@
 			            fecha: {
 							required: "Por favor seleccione una fecha"
 				        }
-			        }
-			    });
+			        },
+			        submitHandler: function() { 
+			        	$.ajax({ 
+							type: "post", 
+							url: "${ createLink(controller : 'Empleados', action : 'guardarEmpleado') }",
+							data: $('#crearEmpleado').serialize(),
+							success: function(){
+								alert("aa");
+			        			$( "#dialog" ).fadeIn('fast').delay(1000).fadeOut('fast');
+			        			$('#crearEmpleado').trigger("reset");
+							}
+						});
+					} 
+				});
 			});
 
 			jQuery.validator.addMethod("lettersonly", function(value, element) {
