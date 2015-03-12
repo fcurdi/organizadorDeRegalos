@@ -15,7 +15,7 @@ class EmpleadosController {
 			def aniomesdia=params.fecha.split("-").collect{Integer.parseInt(it)}
 			def fecha=new Date()
 			
-			fecha.set(year:aniomesdia[0],month:aniomesdia[1],date:aniomesdia[2])
+			fecha.set(year:aniomesdia[0],month:aniomesdia[1]-1,date:aniomesdia[2])
 			println fecha
 			Empleado nuevo=new Empleado(nombre:params.nombre,apellido:params.apellido,
 				dni:params.dni,fechaNacimiento:fecha)

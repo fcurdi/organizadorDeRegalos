@@ -7,7 +7,7 @@ class IndexController {
     def index() {
     	def today = new Date()
 		[regalos: Regalo.list().findAll{
-			it.anio==today.year &&
+			it.anio==today.year+1900 &&
 			it.empleado.fechaNacimiento.date==today.date &&
 			it.empleado.fechaNacimiento.month==today.month},
 		empleados: Empleado.list()]
