@@ -18,7 +18,7 @@ environments {
 			dbCreate = "create-drop" // one of 'create', 'create-drop', 'update', 'validate', ''
 			url = "jdbc:mysql://localhost/proyecto_grails_meli?useUnicode=yes&characterEncoding=UTF-8"
 			username = "root"
-			password = ""
+			password = "Meli2014"
 		}
 	}
 	test {
@@ -26,7 +26,7 @@ environments {
 			dbCreate = "update"
 			url = "jdbc:mysql://localhost/proyecto_grails_meli?useUnicode=yes&characterEncoding=UTF-8"
 			username = "root"
-			password = "mysql"
+			password = "Meli2014Meli2014"
 		}
 	}
 	production {
@@ -34,7 +34,7 @@ environments {
 			dbCreate = "update"
 			url = "jdbc:mysql://localhost/proyecto_grails_meli?useUnicode=yes&characterEncoding=UTF-8"
 			username = "root"
-			password = "mysql"
+			password = "Meli2014"
 		}
 	}
 }
