@@ -53,7 +53,6 @@
 							url: "${ createLink(controller : 'Empleados', action : 'guardarEmpleado') }",
 							data: $('#crearEmpleado').serialize(),
 							success: function(){
-								alert("aa");
 			        			$( "#dialog" ).fadeIn('fast').delay(1000).fadeOut('fast');
 			        			$('#crearEmpleado').trigger("reset");
 							}
@@ -110,7 +109,7 @@
 	<body>
 		<g:set var="titulo" value="Nuevo empleado" scope="request"/>
 		<div class="col-md-12 box">
-			<form id="crearEmpleado" style="width: 350px; text-align: left; margin: auto;" action="${ createLink(controller:"Empleados",action:"guardarEmpleado") }" method="post">
+			<form id="crearEmpleado" style="width: 350px; text-align: left; margin: auto;">
 				<div class="form-group">
 					<label for="inputNombre">Nombre</label>
 					<input data-validation="required" class="form-control" id="input-nombre" name="nombre" placeholder="Nombre" />

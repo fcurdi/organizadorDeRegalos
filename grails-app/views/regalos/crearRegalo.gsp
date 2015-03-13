@@ -49,7 +49,7 @@
 				color: #fff;
 				font-size: 24px;
 				text-align: center;
-				padding: 20px;
+				padding: 30px;
 				background-color: rgb(255, 97, 40);
 				display: none;
 			}
@@ -151,12 +151,11 @@
 				    url: "https://api.mercadolibre.com/items/"+regaloSeleccionado, 
 				    success: function(data){ 
 				    	$.ajax({ 
-						    type: "POST", 
-						    dataType: "JSON", 
-						    url: "${createLink(controller: 'Regalos', action: 'guardarRegalo')}", 
-						    data: { titulo : data.title, url : data.permalink, thumbnail : data.thumbnail, anio : anio, empleadoId: empleadoId ,idMLA:regaloSeleccionado}, 
+						    type: "post", 
+						    url: "${ createLink(controller: 'Regalos', action: 'guardarRegalo') }", 
+						    data: { titulo : data.title, url : data.permalink, thumbnail : data.thumbnail, anio : anio, empleadoId: empleadoId, idMLA : regaloSeleccionado}, 
 						    success: function(data) {
-								$( "#alert-box" ).fadeIn('fast').delay(1000).fadeOut('fast');
+								$( "#dialog" ).fadeIn('fast').delay(1000).fadeOut('fast');
 							} 
 						});
 					} 

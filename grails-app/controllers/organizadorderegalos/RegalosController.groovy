@@ -17,8 +17,8 @@ class RegalosController {
 				idMLA : params.idMLA);
 			Empleado.get(params.empleadoId).addToRegalos(nuevo);
 			nuevo.save(flush:true);
-			println nuevo;
 		}
+		redirect(controller:"index",action:"index")
 	}
 	
 	def guardarRegaloEditado(){
