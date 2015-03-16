@@ -9,6 +9,7 @@
 		<g:layoutHead/>
 	</head>
 	<body>
+		<div class='flogout'><g:message code="springSecurity.logout.header"/></div>
 		<div id="background"></div>
 		<div id="container" class="container">
 			<div class="row">
@@ -21,6 +22,7 @@
 						<li><a href="${ createLink(controller:"Empleados",action:"crearEmpleado")}">NUEVO EMPLEADO</a></li>
 						<li><a href="${ createLink(controller:"Regalos",action:"crearRegalo")}">NUEVO REGALO</a></li>	
 						<li><a href="${ createLink(controller:"Index",action:"mandarMail")}">ENVIAR REPORTE</a></li>
+						<li><a href="${ createLink(controller:"Logout",action:"index")}"> Logout</a></li>
 					</ul>
 				</div>
 			</div>

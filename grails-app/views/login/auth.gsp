@@ -1,6 +1,5 @@
 <html>
 <head>
-	<meta name='layout' content='main'/>
 	<title><g:message code="springSecurity.login.title"/></title>
 	<style type='text/css' media='screen'>
 	#login {
@@ -85,7 +84,6 @@
 </head>
 
 <body>
-	hola
 <div id='login'>
 	<div class='inner'>
 		<div class='fheader'><g:message code="springSecurity.login.header"/></div>
