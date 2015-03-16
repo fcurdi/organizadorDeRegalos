@@ -27,6 +27,10 @@
 /web-app/plugins
 
 # "temporary" build files
-/target
 
-/target-eclipse/
+target-eclipse/
+target/
+.classpath
+.project
+.settings/
+grailsw.bat
