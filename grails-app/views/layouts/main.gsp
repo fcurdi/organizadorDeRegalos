@@ -23,7 +23,7 @@
 						<li><a href="${ createLink(controller:"Regalos",action:"crearRegalo")}">NUEVO REGALO</a></li>	
 						<li><a href="${ createLink(controller:"Index",action:"mandarMail")}">ENVIAR REPORTE</a></li>
 						<li><a href="${ createLink(controller:"Logout",action:"index")}"> Logout</a></li>
-						<li><a href="${ createLink(controller:"Empresa",action:"crearEmpresa")}"> EMPRESAS</a></li>
+						<li><a href="${ createLink(controller:"Empresa",action:"index")}"> EMPRESAS</a></li>
 					</ul>
 				</div>
 			</div>
