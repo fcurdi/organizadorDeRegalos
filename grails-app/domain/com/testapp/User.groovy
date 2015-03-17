@@ -1,4 +1,5 @@
 package com.testapp
+import organizadorderegalos.Empresa
 
 class User {
 
@@ -11,6 +12,7 @@ class User {
 	boolean accountLocked
 	boolean passwordExpired
 
+	static belongsTo = [empresa: Empresa]
 	static transients = ['springSecurityService']
 
 	static constraints = {
