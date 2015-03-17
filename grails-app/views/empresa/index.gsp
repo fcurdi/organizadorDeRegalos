@@ -9,6 +9,11 @@
 	</head>
 	<body>
 		<style>
+
+			.ocultar {
+				display: none;
+			}
+
 			#background {
 				background-color: #00E676;
 			}
@@ -59,10 +64,20 @@
 			<div class="row">
 				<div class="col-md-1"></div>
 				<div class="col-md-10"  style="overflow: auto; height: 360px; background-color: #B9F6CA;">
-					<table class="table table-hover" id="tabla_empresas">
+					<table class="table" id="tabla_empresas">
+						<thead>
+							<tr>
+								<th>Razón Social</th><th>CUIT</th><th>Editar</th><th>Eliminar</th>
+							</tr>
+						</thead>
 						<div>
 							<g:each in="${lista_empresas}" var="empresa">
-								<div> ${empresa.razon_social} </div>
+								<tr id="${empresa.id}">
+									<td>${empresa.razon_social}</td>
+									<td>${empresa.cuit}</td>
+									<td><button onclick="editarEmpresa(${empresa.id})" class="glyphicon glyphicon-edit" aria-hidden="true"></button></td>
+									<td><button onclick="eliminarEmpresa(${empresa.id})" class="glyphicon glyphicon-trash" aria-hidden="true"></button></td>
+								</tr>
 							</g:each>
 						</div>
 					</table>
@@ -78,10 +93,15 @@
 					<form action="${createLink(action: 'crearEmpresa', controller: 'empresa')}" method="post" style="width: 350px; text-align: left; margin: auto;">
 						<div class="form-group">
 							<label for="inputNombre">Razon Social</label>
-							<input class="form-control" id="input-nombre" name="input_rs" placeholder="Razon Social" />
+							<input class="form-control" id="input-nombre" name="input_rs" type="text" placeholder="Razon Social"/>
+						</div>
+						<div class="form-group">	
+							<label for="inputNombre">CUIT</label>
+							<input class="form-control" id="input-cuit" name="input_cuit" type="text" placeholder="CUIT"/>
 						</div>
 						<button id="btn-crear" class="btn btn-primary btn-crearEmpleado" style="text-align: center; width: 200px;" type="submit">Crear</button>
 					 </form>
+						<button id="btn-editar" class="ocultar" style="text-align: center; width: 200px;" type="submit">Guardar cambios</button>
 				</div>
 			</div>
 		</div>
@@ -92,11 +112,55 @@
 			Contraseña: 
 		</div>
 
-		<script>
+		<script type="text/javascript">
 			$("#btn-crear").click(function (){
 				$("#dialog").fadeIn('fast').delay(5000).fadeOut('fast');
-				tabla_empresas.empty();
+				$("#tabla_empresas").empty();
 			});
+
+			function eliminarEmpresa (id) {
+				var promise = $.ajax({ 
+						type: "delete", 
+						url: "/organizadorDeRegalos/empresa/eliminarEmpresa/" + id,
+					});
+				promise.done(function(){
+					window.location.replace("/organizadorDeRegalos/empresa/index");
+				});
+			};
+			
+			function editarEmpresa (id) {
+				var promise = $.ajax({ 
+						type: "get", 
+						url: "/organizadorDeRegalos/empresa/datosEmpresa/" + id,
+					});
+
+					promise.done(function(empresa){
+						$("#input-cuit").val(empresa.cuit);
+						$("#input-nombre").val(empresa.razon_social);
+						$("#btn-editar").attr("class", "btn btn-primary btn-crearEmpleado");
+						$("#btn-crear").attr("class", "ocultar");
+
+						$("#btn-editar").click(function() {
+							var promise_editar = $.ajax({ 
+								type: "put", 
+								url: "/organizadorDeRegalos/empresa/editarEmpresa/" + id + "/?input_rs=" + $("#input-nombre").val() + "&input_cuit=" + $("#input-cuit").val()
+								});
+
+							promise_editar.done(function (){
+								$("#btn-editar").attr("class", "ocultar");
+								$("#btn-crear").attr("class", "btn btn-primary btn-crearEmpleado");
+								$("#input-cuit").val("");
+								$("#input-nombre").val("");
+								$("#tabla_empresas").empty();
+								window.location.replace("/organizadorDeRegalos/empresa/index");
+							});
+						});
+					});
+
+
+			};
+
+
 		</script>	
 	</body>	
 </html>
