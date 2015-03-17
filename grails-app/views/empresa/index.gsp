@@ -72,12 +72,14 @@
 						</thead>
 						<div>
 							<g:each in="${lista_empresas}" var="empresa">
-								<tr id="${empresa.id}">
-									<td>${empresa.razon_social}</td>
-									<td>${empresa.cuit}</td>
-									<td><button onclick="editarEmpresa(${empresa.id})" class="glyphicon glyphicon-edit" aria-hidden="true"></button></td>
-									<td><button onclick="eliminarEmpresa(${empresa.id})" class="glyphicon glyphicon-trash" aria-hidden="true"></button></td>
-								</tr>
+								<g:if test="${empresa.id > 1}">
+									<tr id="${empresa.id}">
+										<td>${empresa.razon_social}</td>
+										<td>${empresa.cuit}</td>
+										<td><button onclick="editarEmpresa(${empresa.id})" class="glyphicon glyphicon-edit" aria-hidden="true"></button></td>
+										<td><button onclick="eliminarEmpresa(${empresa.id})" class="glyphicon glyphicon-trash" aria-hidden="true"></button></td>
+									</tr>
+								</g:if>
 							</g:each>
 						</div>
 					</table>
