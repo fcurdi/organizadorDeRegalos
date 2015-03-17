@@ -63,7 +63,7 @@
 			</div>
 			<div class="row">
 				<div class="col-md-1"></div>
-				<div class="col-md-10"  style="overflow: auto; height: 360px; background-color: #B9F6CA;">
+				<div class="col-md-10"  style="overflow: auto; height: 380px; background-color: #B9F6CA;">
 					<table class="table" id="tabla_empresas">
 						<thead>
 							<tr>
