@@ -1,15 +1,19 @@
 package organizadorderegalos
 import grails.plugin.springsecurity.annotation.*
 
-@Secured(['ROLE_ADMIN'])
+@Secured(['ROLE_EMPRESA'])
 class RegalosController {
 
+	def springSecurityService
     def index() { 
+
 		[regalos:Regalo.list()]
 	}
 	
 	def crearRegalo(){
-		[empleados:Empleado.list()]
+		def user = springSecurityService.currentUser;
+		Empresa empresaActual = user.empresa;        	
+		[empleados:Empleado.list().findAll{it.empresa.razon_social == empresaActual.razon_social}]
 	}
 	
 	def guardarRegalo(){

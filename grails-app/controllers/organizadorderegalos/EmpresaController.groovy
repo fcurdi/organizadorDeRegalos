@@ -8,6 +8,7 @@ import grails.converters.JSON
 @Secured(['ROLE_ADMIN'])
 class EmpresaController {
 
+
     def index() {
     	[lista_empresas: Empresa.list()]
     }
@@ -18,13 +19,15 @@ class EmpresaController {
     	def miEmpresa = new Empresa(razon_social: input_rs, cuit: input_cuit);
     	miEmpresa.save(flush: true, failOnError: true);
 
-		def miEmpresaRole = new Role(authority: 'ROLE_ADMIN').save(flush: true);
 		def miEmpresaUser = new User(username: input_rs, password: "123456");
-		miEmpresaUser.save(flush: true, failOnError: true);
+		miEmpresa.addToAdmins(miEmpresaUser);
+        miEmpresa.save(flush: true, failOnError: true);
 
-		UserRole.create(miEmpresaUser, miEmpresaRole, true);
-
+        miEmpresaUser.save(flush: true, failOnError: true);
+        Role r = Role.list().find{it.authority == "ROLE_EMPRESA"};
+		UserRole.create(miEmpresaUser, r, true);
     	redirect(controller: "Empresa", action: "index");
+
     }
 
     def datosEmpresa(long id) {

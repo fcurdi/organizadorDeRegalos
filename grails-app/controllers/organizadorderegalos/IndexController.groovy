@@ -1,14 +1,20 @@
 package organizadorderegalos
 import grails.plugin.springsecurity.annotation.*
 
-@Secured(['ROLE_ADMIN'])
+@Secured(['ROLE_EMPRESA'])
 class IndexController {
 
 	def reporteService
+	def springSecurityService
 
     def index() {
+
+		def user = springSecurityService.currentUser;
+		Empresa empresaActual = user.empresa; 
+
     	def today = new Date()
 		[regalos: Regalo.list().findAll{
+			it.empleado.empresa.razon_social == empresaActual.razon_social &&
 			it.anio==today.year+1900 &&
 			it.empleado.fechaNacimiento.date==today.date &&
 			it.empleado.fechaNacimiento.month==today.month},

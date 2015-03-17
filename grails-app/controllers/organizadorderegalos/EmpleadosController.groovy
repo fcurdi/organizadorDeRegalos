@@ -1,11 +1,17 @@
 package organizadorderegalos
 import grails.plugin.springsecurity.annotation.*
+import com.testapp.User
+import organizadorderegalos.Empresa
 
-@Secured(['ROLE_ADMIN'])
+@Secured(['ROLE_EMPRESA'])
 class EmpleadosController {
 
+	def springSecurityService
+
     def index() {
-		[empleados: Empleado.list()]
+		def user = springSecurityService.currentUser;
+		Empresa empresaActual = user.empresa;    	
+		[empleados: Empleado.list().findAll{it.empresa.razon_social == empresaActual.razon_social}]
 	}
 	
 	def crearEmpleado(){
@@ -13,15 +19,19 @@ class EmpleadosController {
 	}
 	
 	def guardarEmpleado(){
+
+		def user = springSecurityService.currentUser
+		Empresa empresaActual = user.empresa;
+
 		if (!Empleado.findByDni(params.dni)){
 			def aniomesdia=params.fecha.split("-").collect{Integer.parseInt(it)}
 			def fecha=new Date()
 			fecha.set(year:aniomesdia[0],month:aniomesdia[1]-1,date:aniomesdia[2])
-			println fecha
 			Empleado nuevo=new Empleado(nombre:params.nombre,apellido:params.apellido,
 				dni:params.dni,fechaNacimiento:fecha)
+			empresaActual.addToEmpleados(nuevo);
+			empresaActual.save(flush: true, failOnError: true)
 			nuevo.save(flush: true, failOnError: true)
-			println "erer"
 		}
 		redirect(controller:"index",action:"index")
 	}
