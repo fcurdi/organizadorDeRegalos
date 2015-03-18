@@ -95,16 +95,16 @@
 					<form action="${createLink(action: 'crearAdmin', controller: 'administradores')}" method="post" style="width: 350px; text-align: left; margin: auto;">
 						<div class="form-group">
 							<label for="inputNombre">Nombre de usuario</label>
-							<input class="form-control" id="input_nombre" name="input_nombre" type="text" placeholder="Nombre de usuario"/>
+							<input class="form-control" id="input_nombre" name="input_nombre" type="text" placeholder="Nombre de usuario" required="required"/>
 						</div>
 						<div class="form-group">	
 							<label for="inputNombre">Contraseña</label>
-							<input class="form-control" id="input_password" name="input_password" type="password" placeholder="Contraseña"/>
+							<input class="form-control" id="input_password" name="input_password" type="password" placeholder="Contraseña" required="required"/>
 						</div>
 
 						<div id="combobox" class="form-group">						
 							<label for="inputNombre">Seleccione Empresa</label>	
-							<select name="idEmpresa" class="form-control" style="width: 350px; margin: auto;">
+							<select name="idEmpresa" class="form-control" style="width: 350px; margin: auto;" required="required">
 								<option value="" disabled selected>Empresa</option>
 								<g:each in="${listaEmpresas}" var="empresa">
 									<g:if test="${empresa.id > 1}">
