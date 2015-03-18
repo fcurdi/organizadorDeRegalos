@@ -92,14 +92,14 @@
 		<div class="col-md-6">
 			<div style="text-align: center; margin: auto; margin-bottom: 30px;">
 				<div class="col-md-6" style="margin: auto; text-align: center;">
-					<form action="${createLink(action: 'crearEmpresa', controller: 'empresa')}" method="post" style="width: 350px; text-align: left; margin: auto;">
+					<form id="crearEmpre" action="${createLink(action: 'crearEmpresa', controller: 'empresa')}" method="post" style="width: 350px; text-align: left; margin: auto;">
 						<div class="form-group">
 							<label for="inputNombre">Razon Social</label>
-							<input class="form-control" id="input-nombre" name="input_rs" type="text" placeholder="Razon Social"/>
+							<input class="form-control" id="input-nombre" name="input_rs" type="text" required pattern="[a-zA-Z]*" placeholder="Razon Social" required="required"/>
 						</div>
 						<div class="form-group">	
 							<label for="inputNombre">CUIT</label>
-							<input class="form-control" id="input-cuit" name="input_cuit" type="text" placeholder="CUIT"/>
+							<input class="form-control" id="input-cuit" name="input_cuit" type="number" placeholder="CUIT" required="required"/>
 						</div>
 						<button id="btn-crear" class="btn btn-primary btn-crearEmpleado" style="text-align: center; width: 200px;" type="submit">Crear</button>
 					 </form>
