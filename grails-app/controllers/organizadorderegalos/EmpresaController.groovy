@@ -44,7 +44,9 @@ class EmpresaController {
 
     def eliminarEmpresa(long id) {
         def miEmpresa = Empresa.get(id);
-        for(admins in miEmpresa.admins){
+        //saco roles de los User (sino al eliminarlo trae problemas)
+        //eliminar la empresa elimina todos los User (por el belongsTo y hasmany)
+        for(admins in miEmpresa.admins){ 
             UserRole.removeAll(admins, true);
         }
         miEmpresa.delete(flush: true, failOnError: true);
