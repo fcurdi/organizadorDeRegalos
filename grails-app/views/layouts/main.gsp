@@ -22,8 +22,9 @@
 						<li><a href="${ createLink(controller:"Empleados",action:"crearEmpleado")}">NUEVO EMPLEADO</a></li>
 						<li><a href="${ createLink(controller:"Regalos",action:"crearRegalo")}">NUEVO REGALO</a></li>	
 						<li><a href="${ createLink(controller:"Index",action:"mandarMail")}">ENVIAR REPORTE</a></li>
-						<li><a href="${ createLink(controller:"Logout",action:"index")}"> Logout</a></li>
 						<li><a href="${ createLink(controller:"Empresa",action:"index")}"> EMPRESAS</a></li>
+						<li><a href="${ createLink(controller:"Administradores",action:"index")}"> ADMINISTRADORES</a></li>						
+						<li><a href="${ createLink(controller:"Logout",action:"index")}"> Logout</a></li>
 					</ul>
 				</div>
 			</div>
