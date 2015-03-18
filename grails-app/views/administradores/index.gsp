@@ -107,7 +107,9 @@
 							<select name="idEmpresa" class="form-control" style="width: 350px; margin: auto;">
 								<option value="" disabled selected>Empresa</option>
 								<g:each in="${listaEmpresas}" var="empresa">
-									<option value="${empresa.id}"> ${empresa.razon_social} </option>
+									<g:if test="${empresa.id > 1}">
+										<option value="${empresa.id}"> ${empresa.razon_social} </option>
+									</g:if>
 								</g:each>
 							</select>
 						</div>
